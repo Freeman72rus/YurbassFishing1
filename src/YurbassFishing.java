@@ -3,6 +3,10 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class YurbassFishing implements ActionListener {
     JButton locationListButton;//кнопка перехода на локации
@@ -137,6 +141,7 @@ public class YurbassFishing implements ActionListener {
         menu.add(inventoryLabel);
         menu.add(saveLabel);
         menu.add(exitLabel);
+        loadGame();
 
         menu.setVisible(true);
     }
@@ -162,7 +167,7 @@ public class YurbassFishing implements ActionListener {
             menu.dispose();
         }
         else if (ae.getActionCommand().equals("save")){
-            
+            saveGame();
         }
         else if (ae.getActionCommand().equals("exit")){
             menu.dispose();
@@ -173,6 +178,35 @@ public class YurbassFishing implements ActionListener {
         }
         else if (ae.getActionCommand().equals("inventory")){
             
+        }
+    }
+    static void saveGame(){
+        try(FileWriter writer = new FileWriter(UserList.users[userSelect].userName, false))
+        {
+            String text = "";
+            text += UserList.users[userSelect].userName + "\n" + UserList.users[userSelect].baseNow + "\n"
+                    + UserList.users[userSelect].userMoney + "\n" + UserList.users[userSelect].userExp;
+            writer.write(text);
+
+            writer.flush();
+        }
+        catch(IOException ex){
+
+            System.out.println(ex.getMessage());
+        }
+    }
+    static void loadGame(){
+        try(FileReader reader = new FileReader(UserList.users[userSelect].userName))
+        {
+            Scanner scanner = new Scanner(reader);
+            UserList.users[userSelect].userName = scanner.nextLine();
+            UserList.users[userSelect].baseNow = scanner.nextLine();
+            UserList.users[userSelect].userMoney = Long.parseLong(scanner.nextLine());
+            UserList.users[userSelect].userExp = Long.parseLong(scanner.nextLine());
+        }
+        catch(IOException ex){
+
+            System.out.println(ex.getMessage());
         }
     }
 }

@@ -236,6 +236,8 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
         ButtonModel buttonModelKat = katushkaButton.getModel();
         if (buttonModelSpin.isRollover()){
             infoButLab.setText("Спиннинги");
+            UserList.player1.userMoney += 100;
+            System.out.println(UserList.player1.userMoney);
         }
         else if (buttonModelLine.isRollover()){
             infoButLab.setText("Лески");
