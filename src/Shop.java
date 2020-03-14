@@ -1,12 +1,14 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-class Shop extends JFrame implements MouseListener{//Класс реализует магазин товаров
+class Shop extends JFrame implements MouseListener, ActionListener, ChangeListener {//Класс реализует магазин товаров
     JFrame shopF;
     FishBase fb = new FishBase();;
     int mouseClicX;
@@ -30,6 +32,8 @@ class Shop extends JFrame implements MouseListener{//Класс реализуе
     SpoonList.Spoon[] spoonsList = {SpoonList.spoon_1, SpoonList.spoon_2};
     String[] baitsList = {BaitsList.bWorm.baitsName, BaitsList.prManka.baitsName, BaitsList.arVanil.baitsName};
     String[] katushkasList = {KatushkaList.katushka_1.katName, KatushkaList.katushka_2.katName};
+    JLabel infoButLab = new JLabel("");
+    JButton spinButton = new JButton("");
 
     Shop(){
         //UIManager.put("TabbedPane.contentOpaque", Boolean.FALSE);
@@ -70,7 +74,7 @@ class Shop extends JFrame implements MouseListener{//Класс реализуе
         jscrlpKatushka = new JScrollPane(jlistKatushka);
 
         jscrlpSpin.setSize(230,345);
-        jscrlpSpin.setBounds(100,100,230,345);
+        jscrlpSpin.setBounds(0,0,230,345);
         jscrlpLine.setSize(230,345);
         jscrlpHook.setSize(230,345);
         jscrlpSpoon.setSize(230,345);
@@ -86,9 +90,23 @@ class Shop extends JFrame implements MouseListener{//Класс реализуе
         jtab.add("Наживки", jscrlpBaits);
         jtab.add("Катушки", jscrlpKatushka);
         jtab.setSize(500,565);
-        jtab.setBounds(232,10,550,565);
+        jtab.setBounds(558,13,225,340);
         jtab.setLayout(null);
         jtab.setIconAt(0, new ImageIcon("src\\Image\\interface\\locbutton.gif"));
+
+
+        infoButLab.setBounds(360,530,100,15);
+        spinButton.setBounds(265,475,65,65);
+        spinButton.setBorderPainted(false);
+        spinButton.setFocusPainted(false);
+        spinButton.setContentAreaFilled(false);
+        spinButton.setActionCommand("spin");
+        spinButton.addActionListener(this);
+        spinButton.addChangeListener(this);
+
+
+        panel.add(infoButLab);
+        panel.add(spinButton);
 
         panel.add(jtab);
         //panel.add(jscrlpSpin);
@@ -137,6 +155,23 @@ class Shop extends JFrame implements MouseListener{//Класс реализуе
     @Override
     public void mouseExited(MouseEvent mouseEvent) {
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getActionCommand().equals("spin")){
+            jtab.setSelectedIndex(0);
+
+        }
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent ce) {
+        ButtonModel buttonModelSpin = spinButton.getModel();
+        if (buttonModelSpin.isRollover()){
+            infoButLab.setText("Спиннинги");
+        }
+        else infoButLab.setText("");
     }
 }
 class ShopPanel extends JPanel{
