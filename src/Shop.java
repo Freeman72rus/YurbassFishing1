@@ -238,6 +238,8 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
             infoButLab.setText("Спиннинги");
             UserList.player1.userMoney += 100;
             System.out.println(UserList.player1.userMoney);
+            UserList.player1.userExp += 100;
+            System.out.println(UserList.player1.userExp);
         }
         else if (buttonModelLine.isRollover()){
             infoButLab.setText("Лески");

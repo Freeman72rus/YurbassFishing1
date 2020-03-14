@@ -168,6 +168,7 @@ public class YurbassFishing implements ActionListener {
         }
         else if (ae.getActionCommand().equals("save")){
             saveGame();
+            JOptionPane.showMessageDialog( null, "Сохранение прошло успешно", "", JOptionPane.DEFAULT_OPTION );
         }
         else if (ae.getActionCommand().equals("exit")){
             menu.dispose();
