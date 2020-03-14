@@ -30,8 +30,6 @@ class ThisWaterLocList implements MouseListener{
             if (BaseList.baseList[i].name.equals(UserList.users[YurbassFishing.userSelect].baseNow)){
                 for (int j =0; j<BaseList.baseList[i].locationsList.length; j++){
                     buttonLoc = new JButton[BaseList.baseList[i].locationsList.length];
-                    int f = BaseList.baseList[i].locationsList.length;
-                    System.out.println(f);
                     buttonLoc[i] = new JButton(new ImageIcon("src\\Image\\interface\\locbutton.gif"));
                     buttonLoc[i].setBounds(BaseList.baseList[i].locationsList[j].x, BaseList.baseList[i].locationsList[j].y, 45,42);
                     buttonLoc[i].setBorderPainted(false);
