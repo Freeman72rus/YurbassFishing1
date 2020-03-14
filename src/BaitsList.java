@@ -3,6 +3,8 @@ static Baits bWorm = new Baits("Червь", "src\\\\Image\\\\dev\\\\pr_worm.jpg
 static Baits prManka = new Baits("Прикормка: Манка", "src\\\\Image\\\\dev\\\\pr_manka.gif", TypeBaits.PRIKORM, 10, 80);
 static Baits arVanil = new Baits("Аромат: Ваниль", "src\\\\Image\\\\dev\\\\ar_vanil.jpg", TypeBaits.AROMA, 30, 100);
 
+
+static Baits[] baitsList = {bWorm, prManka, arVanil};
     static class Baits{
         String baitsName;
         String baitsPathImage;

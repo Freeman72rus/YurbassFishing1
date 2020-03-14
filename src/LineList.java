@@ -4,6 +4,8 @@ class LineList {
 static Line line_1 = new Line("2 кг", linePathImage, 2000, 80, 50);
 static  Line line_2 = new Line("3 кг", linePathImage, 3000, 80, 70);
 
+
+static Line[] lineList = {line_1, line_2};
     static class Line{
         String lineName;
         String linePathImage;

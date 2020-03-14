@@ -2,6 +2,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -39,6 +41,16 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
     JButton spoonButton = new JButton("");
     JButton baitsButton = new JButton("");
     JButton katushkaButton = new JButton("");
+    String[] spinImage = {"src\\Image\\dev\\sp_lord.jpg", "src\\Image\\dev\\sp_cottus 000.jpg"};
+    String[] lineImage = {"src\\Image\\dev\\leska.jpg"};
+    String[] hookImage = {"src\\Image\\dev\\hk_viper.jpg", "src\\Image\\dev\\hk_fisher.jpg"};
+    String[] spoonImage = {"src\\Image\\dev\\bl_weltic.jpg", "src\\Image\\dev\\bl_champ.jpg"};
+    String[] baitsImage = {"src\\Image\\dev\\pr_worm.jpg", "src\\Image\\dev\\pr_manka.gif", "src\\Image\\dev\\ar_vanil.jpg"};
+    String[] katushkaImage = {"src\\Image\\dev\\kt_daiwa.jpg", "src\\Image\\dev\\kt_cardinal.jpg"};
+    JLabel imageLabel;
+    JLabel info1;
+    JLabel info2;
+    JLabel info3;
 
     Shop(){
         //UIManager.put("TabbedPane.contentOpaque", Boolean.FALSE);
@@ -53,6 +65,20 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
         ShopPanel panel = new ShopPanel();
         panel.setBounds(0,0,800,600);
         panel.setLayout(null);
+        imageLabel = new JLabel("");
+        info1 = new JLabel("");
+        info1.setFont(new Font("Arial", Font.PLAIN, 14));
+        info1.setForeground(Color.BLACK);
+        info2 = new JLabel("");
+        info2.setFont(new Font("Arial", Font.PLAIN, 14));
+        info2.setForeground(Color.BLACK);
+        info3 = new JLabel("");
+        info3.setFont(new Font("Arial", Font.PLAIN, 14));
+        info3.setForeground(Color.BLACK);
+        panel.add(imageLabel);
+        panel.add(info1);
+        panel.add(info2);
+        panel.add(info3);
         shopF.add(panel);
         shopF.addMouseListener(this);
 
@@ -62,6 +88,106 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
         jlistSpoon = new JList(spoonsList);
         jlistBaits = new JList(baitsList);
         jlistKatushka = new JList(katushkasList);
+
+        jlistSpin.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent le) {
+                int i;
+                i = ((JList)le.getSource()).getSelectedIndex();
+                imageLabel.setIcon(new ImageIcon(spinImage[i]));
+                imageLabel.setBounds(320,70,200,200);
+                info1.setText("Цена: " + SpinningList.spinningList[i].spinPrice + " руб.");
+                info1.setBounds(10, 120, 100, 15);
+                info2.setText("<html>Для покупки сделайте<br>двойной щелчок");
+                info2.setBounds(10, 160, 150, 30);
+                info3.setText("Выдерживает вес " + ((int)SpinningList.spinningList[i].spinCapacity)/1000 + " кг");
+                info3.setBounds(10, 250, 200,15);
+            }
+        });
+        jlistLine.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent le) {
+                int i;
+                i = ((JList)le.getSource()).getSelectedIndex();
+                imageLabel.setIcon(new ImageIcon(lineImage[0]));
+                imageLabel.setBounds(280,50,200,200);
+                info1.setText("Цена: " + LineList.lineList[i].linePrice + " руб.");
+                info1.setBounds(10, 120, 100, 15);
+                info2.setText("<html>Для покупки сделайте<br>двойной щелчок");
+                info2.setBounds(10, 160, 150, 30);
+                info3.setText("Длина " + LineList.lineList[i].lineLength + " м");
+                info3.setBounds(10, 250, 200,15);
+            }
+        });
+        jlistHook.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent le) {
+                int i;
+                i = ((JList)le.getSource()).getSelectedIndex();
+                imageLabel.setIcon(new ImageIcon(hookImage[i]));
+                imageLabel.setBounds(280,50,200,200);
+                info1.setText("Цена: " + HookList.hookList[i].hookPrice + " руб.");
+                info1.setBounds(10, 120, 100, 15);
+                info2.setText("<html>Для покупки сделайте<br>двойной щелчок");
+                info2.setBounds(10, 160, 150, 30);
+                info3.setText("Количество в наборе: " + HookList.hookList[i].hookQuantity + " шт");
+                info3.setBounds(10, 250, 200,15);
+            }
+        });
+        jlistSpoon.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent le) {
+                int i;
+                i = ((JList)le.getSource()).getSelectedIndex();
+                imageLabel.setIcon(new ImageIcon(spoonImage[i]));
+                imageLabel.setBounds(280,50,200,200);
+                /*info1.setText("Цена: " + SpoonList.spoonList[i].hookPrice + " руб.");
+                info1.setBounds(10, 120, 100, 15);
+                info2.setText("<html>Для покупки сделайте<br>двойной щелчок");
+                info2.setBounds(10, 160, 150, 30);
+                info3.setText("Количество в наборе: " + SpoonList.spoonList[i].hookQuantity + " шт");
+                info3.setBounds(10, 250, 200,15);*/
+            }
+        });
+        jlistBaits.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent le) {
+                int i;
+                i = ((JList)le.getSource()).getSelectedIndex();
+                imageLabel.setIcon(new ImageIcon(baitsImage[i]));
+                imageLabel.setBounds(300,50,200,200);
+                info1.setText("Цена: " + BaitsList.baitsList[i].baitsPrice + " руб.");
+                info1.setBounds(10, 120, 100, 15);
+                info2.setText("<html>Для покупки сделайте<br>двойной щелчок");
+                info2.setBounds(10, 160, 150, 30);
+                if (BaitsList.baitsList[i].baitsType.equals(TypeBaits.BAITS)){
+                    info3.setText("Количество: " + BaitsList.baitsList[i].baitsQuantity + " шт");
+                }
+                else if (BaitsList.baitsList[i].baitsType.equals(TypeBaits.PRIKORM)){
+                    info3.setText("Количество порций: " + BaitsList.baitsList[i].baitsQuantity);
+                }
+                else if (BaitsList.baitsList[i].baitsType.equals(TypeBaits.AROMA)){
+                    info3.setText("Количество использований: " + BaitsList.baitsList[i].baitsQuantity);
+                }
+                info3.setBounds(10, 250, 220,15);
+            }
+        });
+        jlistKatushka.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent le) {
+                int i;
+                i = ((JList)le.getSource()).getSelectedIndex();
+                imageLabel.setIcon(new ImageIcon(katushkaImage[i]));
+                imageLabel.setBounds(280,50,200,200);
+                info1.setText("Цена: " + KatushkaList.katushkaList[i].katPrice + " руб.");
+                info1.setBounds(10, 120, 100, 15);
+                info2.setText("<html>Для покупки сделайте<br>двойной щелчок");
+                info2.setBounds(10, 160, 150, 30);
+                info3.setText("<html>Количество подшипников: " + KatushkaList.katushkaList[i].katPodshipQuantity + " шт<br>"
+                + "Выдерживает вес: " + ((int)KatushkaList.katushkaList[i].katCapacity)/1000 + " кг");
+                info3.setBounds(10, 250, 220,30);
+            }
+        });
 
 
         jlistSpin.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -258,6 +384,7 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
         }
         else infoButLab.setText("");
     }
+
 }
 class ShopPanel extends JPanel{
     BufferedImage imageBackground;
