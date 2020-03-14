@@ -32,8 +32,8 @@ class Shop extends JFrame implements MouseListener{//Класс реализуе
     String[] katushkasList = {KatushkaList.katushka_1.katName, KatushkaList.katushka_2.katName};
 
     Shop(){
-        UIManager.put("TabbedPane.contentOpaque", Boolean.FALSE);
-        UIManager.put("TabbedPane.tabsOpaque", Boolean.FALSE);
+        //UIManager.put("TabbedPane.contentOpaque", Boolean.FALSE);
+       // UIManager.put("TabbedPane.tabsOpaque", Boolean.FALSE);
         fb.fb.setVisible(false);
         shopF = new JFrame("Рыболовный магазин");
         shopF.setSize(800,600);
