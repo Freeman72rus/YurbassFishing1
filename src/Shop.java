@@ -52,6 +52,7 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
     JLabel info2;
     JLabel info3;
     JLabel userMoney;
+    JLabel buyInfo;
 
     Shop(){
         //UIManager.put("TabbedPane.contentOpaque", Boolean.FALSE);
@@ -80,11 +81,17 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
         userMoney.setFont(new Font("Arial", Font.PLAIN, 14));
         userMoney.setForeground(Color.WHITE);
         userMoney.setBounds(650,490,300,15);
+        buyInfo = new JLabel("");
+        buyInfo.setFont(new Font("Arial", Font.PLAIN, 14));
+        buyInfo.setForeground(Color.BLACK);
+        buyInfo.setBounds(5,520,300,15);
+
         panel.add(imageLabel);
         panel.add(info1);
         panel.add(info2);
         panel.add(info3);
         panel.add(userMoney);
+        panel.add(buyInfo);
         shopF.add(panel);
         shopF.addMouseListener(this);
 
@@ -192,6 +199,148 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
                 info3.setText("<html>Количество подшипников: " + KatushkaList.katushkaList[i].katPodshipQuantity + " шт<br>"
                 + "Выдерживает вес: " + ((int)KatushkaList.katushkaList[i].katCapacity)/1000 + " кг");
                 info3.setBounds(10, 250, 220,30);
+            }
+        });
+        jlistSpin.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (e.getClickCount() == 2){
+                    int i;
+                    i = ((JList)e.getSource()).getSelectedIndex();
+                    if (UserList.users[YurbassFishing.userSelect].userMoney >= SpinningList.spinningList[i].spinPrice){
+                        UserList.users[YurbassFishing.userSelect].userMoney -= SpinningList.spinningList[i].spinPrice;
+                        userMoney.setText(UserList.users[YurbassFishing.userSelect].userMoney + " руб.");
+                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.spinningsUser.length; j++){
+                            if (UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j] == null){
+                                UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j] = SpinningList.spinningList[i];
+                                buyInfo.setText("Куплен спиннинг " + spinningsList[i]);
+                                break;
+                            }
+                            else buyInfo.setText("Нет места для этой категории товара");
+                        }
+                    }
+                    else buyInfo.setText("Не хватает средств");
+                }
+            }
+        });
+        jlistLine.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (e.getClickCount() == 2){
+                    int i;
+                    i = ((JList)e.getSource()).getSelectedIndex();
+                    if (UserList.users[YurbassFishing.userSelect].userMoney >= LineList.lineList[i].linePrice){
+                        UserList.users[YurbassFishing.userSelect].userMoney -= LineList.lineList[i].linePrice;
+                        userMoney.setText(UserList.users[YurbassFishing.userSelect].userMoney + " руб.");
+                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.linesUser.length; j++){
+                            if (UserList.users[YurbassFishing.userSelect].inventory.linesUser[j] == null){
+                                UserList.users[YurbassFishing.userSelect].inventory.linesUser[j] = LineList.lineList[i];
+                                buyInfo.setText("Куплена леска на " + linesList[i]);
+                                break;
+                            }
+                            else buyInfo.setText("Нет места для этой категории товара");
+                        }
+                    }
+                    else buyInfo.setText("Не хватает средств");
+                }
+            }
+        });
+        jlistHook.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (e.getClickCount() == 2){
+                    int i;
+                    i = ((JList)e.getSource()).getSelectedIndex();
+                    if (UserList.users[YurbassFishing.userSelect].userMoney >= HookList.hookList[i].hookPrice){
+                        UserList.users[YurbassFishing.userSelect].userMoney -= HookList.hookList[i].hookPrice;
+                        userMoney.setText(UserList.users[YurbassFishing.userSelect].userMoney + " руб.");
+                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.hooksUser.length; j++){
+                            if (UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j] == null){
+                                UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j] = HookList.hookList[i];
+                                buyInfo.setText("Куплены крючки " + hooksList[i]);
+                                break;
+                            }
+                            else buyInfo.setText("Нет места для этой категории товара");
+                        }
+                    }
+                    else buyInfo.setText("Не хватает средств");
+                }
+            }
+        });
+        /*jlistSpoon.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (e.getClickCount() == 2){
+                    int i;
+                    i = ((JList)e.getSource()).getSelectedIndex();
+                    if (UserList.users[YurbassFishing.userSelect].userMoney >= SpoonList.spoonList[i].spoonPrice){
+                        UserList.users[YurbassFishing.userSelect].userMoney -= SpoonList.spoonList[i].spoonPrice;
+                        userMoney.setText(UserList.users[YurbassFishing.userSelect].userMoney + " руб.");
+                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.spoonsUser.length; j++){
+                            if (UserList.users[YurbassFishing.userSelect].inventory.spoonsUser[j] == null){
+                                UserList.users[YurbassFishing.userSelect].inventory.spoonsUser[j] = SpoonList.spoonList[i];
+                                buyInfo.setText("Куплено: " + spoonsList[i]);
+                                break;
+                            }
+                            else buyInfo.setText("Нет места для этой категории товара");
+                        }
+                    }
+                    else buyInfo.setText("Не хватает средств");
+                }
+            }
+        });*/
+        jlistBaits.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (e.getClickCount() == 2){
+                    int i;
+                    i = ((JList)e.getSource()).getSelectedIndex();
+                    if (UserList.users[YurbassFishing.userSelect].userMoney >= BaitsList.baitsList[i].baitsPrice){
+                        UserList.users[YurbassFishing.userSelect].userMoney -= BaitsList.baitsList[i].baitsPrice;
+                        userMoney.setText(UserList.users[YurbassFishing.userSelect].userMoney + " руб.");
+                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.baitsUser.length; j++){
+                            if (UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j] == null){
+                                UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j] = BaitsList.baitsList[i];
+                                buyInfo.setText("Куплено: " + baitsList[i]);
+                                break;
+                            }
+                            else buyInfo.setText("Нет места для этой категории товара");
+                        }
+                    }
+                    else buyInfo.setText("Не хватает средств");
+                }
+            }
+        });
+        jlistKatushka.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (e.getClickCount() == 2){
+                    int i;
+                    i = ((JList)e.getSource()).getSelectedIndex();
+                    if (UserList.users[YurbassFishing.userSelect].userMoney >= KatushkaList.katushkaList[i].katPrice){
+                        UserList.users[YurbassFishing.userSelect].userMoney -= KatushkaList.katushkaList[i].katPrice;
+                        userMoney.setText(UserList.users[YurbassFishing.userSelect].userMoney + " руб.");
+                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.katUser.length; j++){
+                            if (UserList.users[YurbassFishing.userSelect].inventory.katUser[j] == null){
+                                UserList.users[YurbassFishing.userSelect].inventory.katUser[j] = KatushkaList.katushkaList[i];
+                                buyInfo.setText("Куплено: " + katushkasList[i]);
+                                break;
+                            }
+                            else buyInfo.setText("Нет места для этой категории товара");
+                        }
+                    }
+                    else buyInfo.setText("Не хватает средств");
+                    for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.katUser.length; j++){
+                        if (UserList.users[YurbassFishing.userSelect].inventory.katUser[j] != null)
+                            System.out.println(UserList.users[YurbassFishing.userSelect].inventory.katUser[j].katName);
+                    }
+                }
             }
         });
 

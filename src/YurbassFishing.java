@@ -182,11 +182,56 @@ public class YurbassFishing implements ActionListener {
         }
     }
     static void saveGame(){
+        String inventSpin = "";
+        String inventLine = "";
+        String inventHook = "";
+        String inventSpoon = "";
+        String inventBaits = "";
+        String inventKat = "";
         try(FileWriter writer = new FileWriter(UserList.users[userSelect].userName, false))
         {
             String text = "";
             text += UserList.users[userSelect].userName + "\n" + UserList.users[userSelect].baseNow + "\n"
-                    + UserList.users[userSelect].userMoney + "\n" + UserList.users[userSelect].userExp;
+                    + UserList.users[userSelect].userMoney + "\n" + UserList.users[userSelect].userExp + "\n";
+            for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.spinningsUser.length; j++){
+                if (UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j] != null){
+                    inventSpin += "spin:" + UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j].spinName + "|" + UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j].spinSafety + "\n";
+                }
+            }
+            text += inventSpin;
+            for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.linesUser.length; j++){
+                if (UserList.users[YurbassFishing.userSelect].inventory.linesUser[j] != null){
+                    inventLine += "line:" + UserList.users[YurbassFishing.userSelect].inventory.linesUser[j].lineName + "|" + UserList.users[YurbassFishing.userSelect].inventory.linesUser[j].lineLength + "\n";
+                }
+            }
+            text += inventLine;
+            for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.hooksUser.length; j++){
+                if (UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j] != null){
+                    inventHook += "hook:" + UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j].hookName + "|" + UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j].hookQuality + "\n";
+                }
+            }
+            text += inventHook;
+            /*for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.spoonsUser.length; j++){
+                if (UserList.users[YurbassFishing.userSelect].inventory.spoonsUser[j] != null){
+                    inventSpoon += "spoon:" + UserList.users[YurbassFishing.userSelect].inventory.spoonsUser[j].spinName + "|" + UserList.users[YurbassFishing.userSelect].inventory.spoonsUser[j].spinSafety + "\n";
+                }
+            }
+            text += inventSpoon;*/
+            for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.baitsUser.length; j++){
+                if (UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j] != null){
+                    inventBaits += "baits:" + UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j].baitsName + "|" + UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j].baitsQuantity + "\n";
+                }
+            }
+            text += inventBaits;
+            for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.katUser.length; j++){
+                if (UserList.users[YurbassFishing.userSelect].inventory.katUser[j] != null){
+                    inventKat += "kat:" + UserList.users[YurbassFishing.userSelect].inventory.katUser[j].katName + "|" + UserList.users[YurbassFishing.userSelect].inventory.katUser[j].katSafety + "\n";
+                }
+            }
+            text += inventKat;
+
+
+
             writer.write(text);
 
             writer.flush();
