@@ -51,6 +51,7 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
     JLabel info1;
     JLabel info2;
     JLabel info3;
+    JLabel userMoney;
 
     Shop(){
         //UIManager.put("TabbedPane.contentOpaque", Boolean.FALSE);
@@ -75,10 +76,15 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
         info3 = new JLabel("");
         info3.setFont(new Font("Arial", Font.PLAIN, 14));
         info3.setForeground(Color.BLACK);
+        userMoney = new JLabel(UserList.users[YurbassFishing.userSelect].userMoney + " руб.");
+        userMoney.setFont(new Font("Arial", Font.PLAIN, 14));
+        userMoney.setForeground(Color.WHITE);
+        userMoney.setBounds(650,490,300,15);
         panel.add(imageLabel);
         panel.add(info1);
         panel.add(info2);
         panel.add(info3);
+        panel.add(userMoney);
         shopF.add(panel);
         shopF.addMouseListener(this);
 
@@ -362,10 +368,6 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
         ButtonModel buttonModelKat = katushkaButton.getModel();
         if (buttonModelSpin.isRollover()){
             infoButLab.setText("Спиннинги");
-            UserList.player1.userMoney += 100;
-            System.out.println(UserList.player1.userMoney);
-            UserList.player1.userExp += 100;
-            System.out.println(UserList.player1.userExp);
         }
         else if (buttonModelLine.isRollover()){
             infoButLab.setText("Лески");
