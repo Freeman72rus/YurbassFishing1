@@ -336,10 +336,6 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
                         }
                     }
                     else buyInfo.setText("Не хватает средств");
-                    for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.katUser.length; j++){
-                        if (UserList.users[YurbassFishing.userSelect].inventory.katUser[j] != null)
-                            System.out.println(UserList.users[YurbassFishing.userSelect].inventory.katUser[j].katName);
-                    }
                 }
             }
         });

@@ -141,7 +141,6 @@ public class YurbassFishing implements ActionListener {
         menu.add(inventoryLabel);
         menu.add(saveLabel);
         menu.add(exitLabel);
-        loadGame();
 
         menu.setVisible(true);
     }
