@@ -249,6 +249,124 @@ public class YurbassFishing implements ActionListener {
             UserList.users[userSelect].baseNow = scanner.nextLine();
             UserList.users[userSelect].userMoney = Long.parseLong(scanner.nextLine());
             UserList.users[userSelect].userExp = Long.parseLong(scanner.nextLine());
+            while (scanner.hasNextLine()){
+                String s = scanner.nextLine();
+                String sub = "";
+                int pos = s.indexOf('|');
+                if (s.contains("spin:")){
+                    try {
+                        sub = s.substring(5, pos);
+                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.spinningsUser.length; j++){
+                            if (UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j] == null){
+                                for (int i =0; i < SpinningList.spinningList.length; i++){
+                                    if (SpinningList.spinningList[i].spinName.equals(sub)){
+                                        UserList.users[userSelect].inventory.spinningsUser[j] = SpinningList.spinningList[i];
+                                        System.out.println(sub);
+                                        sub = s.substring(pos+1);
+                                        UserList.users[userSelect].inventory.spinningsUser[j].spinSafety = Integer.parseInt(sub);
+                                    }
+                                    //break;
+                                }
+                            }
+                            //break;
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println("Ошибка в получении спиннинга из сохранения");
+                    }
+                }
+                else if (s.contains("line:")){
+                    try {
+                        sub = s.substring(5, pos);
+                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.linesUser.length; j++){
+                            if (UserList.users[YurbassFishing.userSelect].inventory.linesUser[j] == null){
+                                for (int i =0; i < LineList.lineList.length; i++){
+                                    if (LineList.lineList[i].lineName.equals(sub)){
+                                        UserList.users[userSelect].inventory.linesUser[j] = LineList.lineList[i];
+                                        System.out.println(sub);
+                                        sub = s.substring(pos+1);
+                                        UserList.users[userSelect].inventory.linesUser[j].lineLength = Integer.parseInt(sub);
+                                    }
+                                    //break;
+                                }
+                            }
+                            //break;
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println("Ошибка в получении лески из сохранения");
+                    }
+                }
+                else if (s.contains("hook:")){
+                    try {
+                        sub = s.substring(5, pos);
+                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.hooksUser.length; j++){
+                            if (UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j] == null){
+                                for (int i =0; i < HookList.hookList.length; i++){
+                                    if (HookList.hookList[i].hookName.equals(sub)){
+                                        UserList.users[userSelect].inventory.hooksUser[j] = HookList.hookList[i];
+                                        System.out.println(sub);
+                                        sub = s.substring(pos+1);
+                                        UserList.users[userSelect].inventory.hooksUser[j].hookQuantity = Integer.parseInt(sub);
+                                    }
+                                    //break;
+                                }
+                            }
+                            //break;
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println("Ошибка в получении крючка из сохранения");
+                    }
+                }
+                /*else if (s.contains("spoon:")){
+
+                }*/
+                else if (s.contains("baits:")){
+                    try {
+                        sub = s.substring(6, pos);
+                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.baitsUser.length; j++){
+                            if (UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j] == null){
+                                for (int i =0; i < BaitsList.baitsList.length; i++){
+                                    if (BaitsList.baitsList[i].baitsName.equals(sub)){
+                                        UserList.users[userSelect].inventory.baitsUser[j] = BaitsList.baitsList[i];
+                                        System.out.println(sub);
+                                        sub = s.substring(pos+1);
+                                        UserList.users[userSelect].inventory.baitsUser[j].baitsQuantity = Integer.parseInt(sub);
+                                    }
+                                    //break;
+                                }
+                            }
+                            //break;
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println("Ошибка в получении наживки из сохранения");
+                    }
+                }
+                else if (s.contains("kat:")){
+                    try {
+                        sub = s.substring(4, pos);
+                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.katUser.length; j++){
+                            if (UserList.users[YurbassFishing.userSelect].inventory.katUser[j] == null){
+                                for (int i =0; i < KatushkaList.katushkaList.length; i++){
+                                    if (KatushkaList.katushkaList[i].katName.equals(sub)){
+                                        UserList.users[userSelect].inventory.katUser[j] = KatushkaList.katushkaList[i];
+                                        System.out.println(sub);
+                                        sub = s.substring(pos+1);
+                                        UserList.users[userSelect].inventory.katUser[j].katSafety = Integer.parseInt(sub);
+                                    }
+                                    //break;
+                                }
+                            }
+                            //break;
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println("Ошибка в получении катушки из сохранения");
+                    }
+                }
+            }
         }
         catch(IOException ex){
 
