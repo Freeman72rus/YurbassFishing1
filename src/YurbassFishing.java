@@ -17,6 +17,7 @@ public class YurbassFishing implements ActionListener {
     JButton cageButton;//кнопка перехода в садок
     FishBase fb;
     ThisWaterLocList loclistFrame;
+    InventoryFrame inventoryFrame;
     JFrame menu;
     JLabel locationListLabel;
     JLabel fishBaseLabel;
@@ -177,7 +178,9 @@ public class YurbassFishing implements ActionListener {
             
         }
         else if (ae.getActionCommand().equals("inventory")){
-            
+            inventoryFrame = new InventoryFrame();
+            menu.setVisible(false);
+            menu.dispose();
         }
     }
     static void saveGame(){
