@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -175,7 +176,7 @@ public class YurbassFishing implements ActionListener {
             System.exit(0);
         }
         else if (ae.getActionCommand().equals("cage")){
-            
+
         }
         else if (ae.getActionCommand().equals("inventory")){
             inventoryFrame = new InventoryFrame();
@@ -203,7 +204,7 @@ public class YurbassFishing implements ActionListener {
             text += inventSpin;
             for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.linesUser.length; j++){
                 if (UserList.users[YurbassFishing.userSelect].inventory.linesUser[j] != null){
-                    inventLine += "line:" + UserList.users[YurbassFishing.userSelect].inventory.linesUser[j].lineName + "|" + UserList.users[YurbassFishing.userSelect].inventory.linesUser[j].lineLength + "\n";
+                    inventLine += "line:" + UserList.users[YurbassFishing.userSelect].inventory.linesUser[j].lineName + "|" + UserList.users[YurbassFishing.userSelect].inventory.linesUser[j].lineLength + "|" + UserList.users[YurbassFishing.userSelect].inventory.linesUser[j].tackleNumber + "\n";
                 }
             }
             text += inventLine;
@@ -287,7 +288,12 @@ public class YurbassFishing implements ActionListener {
                                         UserList.users[userSelect].inventory.linesUser[j] = LineList.lineList[i];
                                         System.out.println(sub);
                                         sub = s.substring(pos+1);
+                                        int pos2 = sub.indexOf('|');
+                                        sub = s.substring(pos+1, pos+pos2+1);
                                         UserList.users[userSelect].inventory.linesUser[j].lineLength = Integer.parseInt(sub);
+                                        sub = s.substring(pos+pos2+2);
+                                        System.out.println(sub + " grtjg");
+                                        UserList.users[userSelect].inventory.linesUser[j].tackleNumber = Integer.parseInt(sub);
                                     }
                                     //break;
                                 }
@@ -322,7 +328,6 @@ public class YurbassFishing implements ActionListener {
                     }
                 }
                 /*else if (s.contains("spoon:")){
-
                 }*/
                 else if (s.contains("baits:")){
                     try {
