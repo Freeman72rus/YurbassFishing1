@@ -15,6 +15,7 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
     FishBase fb = new FishBase();;
     int mouseClicX;
     int mouseClicY;
+    int countSpin = 0;
     JList jlistSpin;
     JList jlistLine;
     JList jlistHook;
@@ -213,7 +214,8 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
                         userMoney.setText(UserList.users[YurbassFishing.userSelect].userMoney + " руб.");
                         for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.spinningsUser.length; j++){
                             if (UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j] == null){
-                                UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j] = SpinningList.spinningList[i];
+                                UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j] = new SpinningList.Spinning(countSpin, SpinningList.spinningList[i].spinName, SpinningList.spinningList[i].spinPathImage, SpinningList.spinningList[i].spinCapacity, SpinningList.spinningList[i].spinPrice, SpinningList.spinningList[i].spinSafety);
+                                countSpin += 1;
                                 buyInfo.setText("Куплен спиннинг " + spinningsList[i]);
                                 break;
                             }
@@ -236,7 +238,7 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
                         userMoney.setText(UserList.users[YurbassFishing.userSelect].userMoney + " руб.");
                         for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.linesUser.length; j++){
                             if (UserList.users[YurbassFishing.userSelect].inventory.linesUser[j] == null){
-                                UserList.users[YurbassFishing.userSelect].inventory.linesUser[j] = LineList.lineList[i];
+                                UserList.users[YurbassFishing.userSelect].inventory.linesUser[j] = new  LineList.Line(LineList.lineList[i].lineName, LineList.lineList[i].linePathImage, LineList.lineList[i].lineCapacity, LineList.lineList[i].lineLength, LineList.lineList[i].linePrice, LineList.lineList[i].tackleNumber, LineList.lineList[i].tackleSelect);
                                 buyInfo.setText("Куплена леска на " + linesList[i]);
                                 break;
                             }

@@ -14,7 +14,7 @@ class SelectUser {
     JScrollPane jscrlp;
     JButton selectButton;
     YurbassFishing yf;
-    static Tackle[] tacklesList = new Tackle[100];
+    //static Tackle[] tacklesList = new Tackle[100];
     SelectUser(){
         selectUser = new JFrame("Выбор профиля");
         selectUser.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -45,9 +45,9 @@ class SelectUser {
                 }
             }
         });
-        for (int i = 0; i<tacklesList.length;i++){
+        /*for (int i = 0; i<tacklesList.length;i++){
             tacklesList[i] = new Tackle(UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[i]);
-        }
+        }*/
     }
     public static void main(String[]args){
         SwingUtilities.invokeLater(new Runnable() {
