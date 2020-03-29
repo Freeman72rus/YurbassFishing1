@@ -27,6 +27,7 @@ public class YurbassFishing implements ActionListener {
     JLabel saveLabel;
     JLabel exitLabel;
     static int userSelect = 0;//Выбранный сейчас юзер, по умолчанию самый первый созданный, дописать метод выбора профиля игрока при входе
+    static int countSpin = 0;//глобальный счетчик спиннингов купленных в этом профиле
 
     YurbassFishing(){
         menu = new JFrame("Yurbass Fishing. Главное меню");

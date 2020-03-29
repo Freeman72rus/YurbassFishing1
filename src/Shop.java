@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -15,7 +17,6 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
     FishBase fb = new FishBase();;
     int mouseClicX;
     int mouseClicY;
-    int countSpin = 0;
     JList jlistSpin;
     JList jlistLine;
     JList jlistHook;
@@ -214,8 +215,10 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
                         userMoney.setText(UserList.users[YurbassFishing.userSelect].userMoney + " руб.");
                         for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.spinningsUser.length; j++){
                             if (UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j] == null){
-                                UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j] = new SpinningList.Spinning(countSpin, SpinningList.spinningList[i].spinName, SpinningList.spinningList[i].spinPathImage, SpinningList.spinningList[i].spinCapacity, SpinningList.spinningList[i].spinPrice, SpinningList.spinningList[i].spinSafety);
-                                countSpin += 1;
+                                UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j] = new SpinningList.Spinning(YurbassFishing.countSpin, SpinningList.spinningList[i].spinName, SpinningList.spinningList[i].spinPathImage, SpinningList.spinningList[i].spinCapacity, SpinningList.spinningList[i].spinPrice, SpinningList.spinningList[i].spinSafety);
+                                YurbassFishing.countSpin += 1;
+                                System.out.println(UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j].spinCount + "spin");
+                                SelectUser.tacklesList[j] = new Tackle(UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j]);
                                 buyInfo.setText("Куплен спиннинг " + spinningsList[i]);
                                 break;
                             }
@@ -261,7 +264,7 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
                         userMoney.setText(UserList.users[YurbassFishing.userSelect].userMoney + " руб.");
                         for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.hooksUser.length; j++){
                             if (UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j] == null){
-                                UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j] = HookList.hookList[i];
+                                UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j] = new HookList.Hook(HookList.hookList[i].hookName, HookList.hookList[i].hookPathImage, HookList.hookList[i].hookQuality, HookList.hookList[i].hookQuantity, HookList.hookList[i].hookPrice, HookList.hookList[i].tackleNumber);
                                 buyInfo.setText("Куплены крючки " + hooksList[i]);
                                 break;
                             }
