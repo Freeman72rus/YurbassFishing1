@@ -241,7 +241,7 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
                         userMoney.setText(UserList.users[YurbassFishing.userSelect].userMoney + " руб.");
                         for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.linesUser.length; j++){
                             if (UserList.users[YurbassFishing.userSelect].inventory.linesUser[j] == null){
-                                UserList.users[YurbassFishing.userSelect].inventory.linesUser[j] = new  LineList.Line(LineList.lineList[i].lineName, LineList.lineList[i].linePathImage, LineList.lineList[i].lineCapacity, LineList.lineList[i].lineLength, LineList.lineList[i].linePrice, LineList.lineList[i].tackleNumber, LineList.lineList[i].tackleSelect);
+                                UserList.users[YurbassFishing.userSelect].inventory.linesUser[j] = new  LineList.Line(LineList.lineList[i].lineName, LineList.lineList[i].linePathImage, LineList.lineList[i].lineSmallImage, LineList.lineList[i].lineCapacity, LineList.lineList[i].lineLength, LineList.lineList[i].linePrice, LineList.lineList[i].tackleNumber, LineList.lineList[i].tackleSelect);
                                 buyInfo.setText("Куплена леска на " + linesList[i]);
                                 break;
                             }
@@ -262,13 +262,27 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
                     if (UserList.users[YurbassFishing.userSelect].userMoney >= HookList.hookList[i].hookPrice){
                         UserList.users[YurbassFishing.userSelect].userMoney -= HookList.hookList[i].hookPrice;
                         userMoney.setText(UserList.users[YurbassFishing.userSelect].userMoney + " руб.");
+                        boolean flag = false;
                         for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.hooksUser.length; j++){
                             if (UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j] == null){
-                                UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j] = new HookList.Hook(HookList.hookList[i].hookName, HookList.hookList[i].hookPathImage, HookList.hookList[i].hookQuality, HookList.hookList[i].hookQuantity, HookList.hookList[i].hookPrice, HookList.hookList[i].tackleNumber);
+                                continue;
+                            }
+                            if (HookList.hookList[i].hookName.equals(UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j].hookName)){
+                                UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j].hookQuantity += HookList.hookList[i].hookQuantity;
+                                flag = true;
                                 buyInfo.setText("Куплены крючки " + hooksList[i]);
                                 break;
                             }
-                            else buyInfo.setText("Нет места для этой категории товара");
+                        }
+                        if (flag != true){
+                            for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.hooksUser.length; j++){
+                                if (UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j] == null){
+                                    UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j] = new HookList.Hook(HookList.hookList[i].hookName, HookList.hookList[i].hookPathImage, HookList.hookList[i].hookSmallImage, HookList.hookList[i].hookQuality, HookList.hookList[i].hookQuantity, HookList.hookList[i].hookPrice, HookList.hookList[i].tackleNumber);
+                                    buyInfo.setText("Куплены крючки " + hooksList[i]);
+                                    break;
+                                }
+                                else buyInfo.setText("Нет места для этой категории товара");
+                            }
                         }
                     }
                     else buyInfo.setText("Не хватает средств");
