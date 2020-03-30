@@ -43,12 +43,12 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
     JButton spoonButton = new JButton("");
     JButton baitsButton = new JButton("");
     JButton katushkaButton = new JButton("");
-    String[] spinImage = {"src\\Image\\dev\\sp_lord.jpg", "src\\Image\\dev\\sp_cottus 000.jpg"};
-    String[] lineImage = {"src\\Image\\dev\\leska.jpg"};
-    String[] hookImage = {"src\\Image\\dev\\hk_viper.jpg", "src\\Image\\dev\\hk_fisher.jpg"};
-    String[] spoonImage = {"src\\Image\\dev\\bl_weltic.jpg", "src\\Image\\dev\\bl_champ.jpg"};
-    String[] baitsImage = {"src\\Image\\dev\\pr_worm.jpg", "src\\Image\\dev\\pr_manka.gif", "src\\Image\\dev\\ar_vanil.jpg"};
-    String[] katushkaImage = {"src\\Image\\dev\\kt_daiwa.jpg", "src\\Image\\dev\\kt_cardinal.jpg"};
+    ImageIcon[] spinImage = {new ImageIcon(Shop.class.getResource("/Image/dev/sp_lord.jpg")), new ImageIcon(Shop.class.getResource("/Image/dev/sp_cottus 000.jpg"))};
+    ImageIcon[] lineImage = {new ImageIcon(Shop.class.getResource("/Image/dev/leska.jpg"))};
+    ImageIcon[] hookImage = {new ImageIcon(Shop.class.getResource("/Image/dev/hk_viper.jpg")), new ImageIcon(Shop.class.getResource("/Image/dev/hk_fisher.jpg"))};
+    ImageIcon[] spoonImage = {new ImageIcon(Shop.class.getResource("/Image/dev/bl_weltic.jpg")), new ImageIcon(Shop.class.getResource("/Image/dev/bl_champ.jpg"))};
+    ImageIcon[] baitsImage = {new ImageIcon(Shop.class.getResource("/Image/dev/pr_worm.jpg")), new ImageIcon(Shop.class.getResource("/Image/dev/pr_manka.gif")), new ImageIcon(Shop.class.getResource("/Image/dev/ar_vanil.jpg"))};
+    ImageIcon[] katushkaImage = {new ImageIcon(Shop.class.getResource("/Image/dev/kt_daiwa.jpg")), new ImageIcon(Shop.class.getResource("/Image/dev/kt_cardinal.jpg"))};
     JLabel imageLabel;
     JLabel info1;
     JLabel info2;
@@ -109,7 +109,7 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
             public void valueChanged(ListSelectionEvent le) {
                 int i;
                 i = ((JList)le.getSource()).getSelectedIndex();
-                imageLabel.setIcon(new ImageIcon(spinImage[i]));
+                imageLabel.setIcon(spinImage[i]);
                 imageLabel.setBounds(320,70,200,200);
                 info1.setText("Цена: " + SpinningList.spinningList[i].spinPrice + " руб.");
                 info1.setBounds(10, 120, 100, 15);
@@ -124,7 +124,7 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
             public void valueChanged(ListSelectionEvent le) {
                 int i;
                 i = ((JList)le.getSource()).getSelectedIndex();
-                imageLabel.setIcon(new ImageIcon(lineImage[0]));
+                imageLabel.setIcon(lineImage[0]);
                 imageLabel.setBounds(280,50,200,200);
                 info1.setText("Цена: " + LineList.lineList[i].linePrice + " руб.");
                 info1.setBounds(10, 120, 100, 15);
@@ -139,7 +139,7 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
             public void valueChanged(ListSelectionEvent le) {
                 int i;
                 i = ((JList)le.getSource()).getSelectedIndex();
-                imageLabel.setIcon(new ImageIcon(hookImage[i]));
+                imageLabel.setIcon(hookImage[i]);
                 imageLabel.setBounds(280,50,200,200);
                 info1.setText("Цена: " + HookList.hookList[i].hookPrice + " руб.");
                 info1.setBounds(10, 120, 100, 15);
@@ -154,7 +154,7 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
             public void valueChanged(ListSelectionEvent le) {
                 int i;
                 i = ((JList)le.getSource()).getSelectedIndex();
-                imageLabel.setIcon(new ImageIcon(spoonImage[i]));
+                imageLabel.setIcon(spoonImage[i]);
                 imageLabel.setBounds(280,50,200,200);
                 /*info1.setText("Цена: " + SpoonList.spoonList[i].hookPrice + " руб.");
                 info1.setBounds(10, 120, 100, 15);
@@ -169,7 +169,7 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
             public void valueChanged(ListSelectionEvent le) {
                 int i;
                 i = ((JList)le.getSource()).getSelectedIndex();
-                imageLabel.setIcon(new ImageIcon(baitsImage[i]));
+                imageLabel.setIcon(baitsImage[i]);
                 imageLabel.setBounds(300,50,200,200);
                 info1.setText("Цена: " + BaitsList.baitsList[i].baitsPrice + " руб.");
                 info1.setBounds(10, 120, 100, 15);
@@ -192,7 +192,7 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
             public void valueChanged(ListSelectionEvent le) {
                 int i;
                 i = ((JList)le.getSource()).getSelectedIndex();
-                imageLabel.setIcon(new ImageIcon(katushkaImage[i]));
+                imageLabel.setIcon(katushkaImage[i]);
                 imageLabel.setBounds(280,50,200,200);
                 info1.setText("Цена: " + KatushkaList.katushkaList[i].katPrice + " руб.");
                 info1.setBounds(10, 120, 100, 15);
@@ -544,9 +544,9 @@ class ShopPanel extends JPanel{
     BufferedImage imageText;
     protected void paintComponent(Graphics g){
         try {
-            imageBackground = ImageIO.read(new File("src\\Image\\interface\\shop.jpg"));
-            imageFon = ImageIO.read(new File("src\\Image\\interface\\shop_part2.gif"));
-            imageText = ImageIO.read(new File("src\\Image\\interface\\shop_part1.gif"));
+            imageBackground = ImageIO.read(getClass().getResource("/Image/interface/shop.jpg"));
+            imageFon = ImageIO.read(getClass().getResource("/Image/interface/shop_part2.gif"));
+            imageText = ImageIO.read(getClass().getResource("/Image/interface/shop_part1.gif"));
             g.drawImage(imageBackground, 0,0, null);
             g.setFont(new Font("TimesRoman", Font.PLAIN, 18));
             g.drawString("назад", 680, 550);

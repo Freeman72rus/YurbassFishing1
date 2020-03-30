@@ -1,13 +1,14 @@
+import javax.swing.*;
 import java.awt.*;
 
 class FishList {//Класс реализует рыбы
-static Fish plotva = new Fish("Плотва обыкновенная", "src\\Image\\fish\\plotva.jpg", 0, 100, 2000);
+static Fish plotva = new Fish("Плотва обыкновенная", new ImageIcon(FishList.class.getResource("/Image/fish/plotva.jpg")), 0, 100, 2000);
 
 
 
     static class Fish{
         String fishName;//Имя рыбы
-        String fishImagePath;
+        ImageIcon fishImagePath;
         double fishWeight;
         int minWeight;//Минимальный вес
         int maxWeight;//Максимальный вес
@@ -30,7 +31,7 @@ static Fish plotva = new Fish("Плотва обыкновенная", "src\\Ima
         int[] aromaNibble;//вероятность клёва при использовании ароматизатора для прикормки
         int licenseType;//тип необходимой лицензии*/
 
-        Fish(String fishName, String fishImagePath, double fishWeight, int minWeight, int maxWeight/*, int setWeight, int minDepth, int maxDepth, int bottom, int center, int top, int dayActiv, int nightActiv,
+        Fish(String fishName, ImageIcon fishImagePath, double fishWeight, int minWeight, int maxWeight/*, int setWeight, int minDepth, int maxDepth, int bottom, int center, int top, int dayActiv, int nightActiv,
                  int[] baitsNibble, int fishPrice, int weightPrice, int expFish, int weightExp, int accuracyNibble, int characterNibble, int[] prikNibble, int[] aromaNibble, int licenseType*/){
             this.fishImagePath = fishImagePath;
             this.fishWeight = fishWeight;

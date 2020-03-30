@@ -1,5 +1,5 @@
 class BaseList {//класс содержит все объекты класса Base
-    static Base home = new Base("р. Тура", "src\\\\res\\\\Home\\\\index.jpg", new LocationList.Location[] {LocationList.homeLoc1, LocationList.homeLoc2});
+    static Base home = new Base("р. Тура", "/res/Home/index.jpg", new LocationList.Location[] {LocationList.homeLoc1, LocationList.homeLoc2});
 
 
     static Base[] baseList = {home};

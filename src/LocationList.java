@@ -1,8 +1,8 @@
 import java.awt.*;
 
 class LocationList {//Класс реализует локации
-    static Location homeLoc1 = new Location("src\\\\res\\\\Home\\\\Loc_1_Day.jpg", "src\\\\res\\\\Home\\\\Loc_1_Night.jpg", 200, 200, new FishList.Fish[]{FishList.plotva});
-    static Location homeLoc2 = new Location("src\\\\res\\\\Home\\\\Loc_2_Day.jpg", "src\\\\res\\\\Home\\\\Loc_2_Night.jpg", 390, 230, new FishList.Fish[]{FishList.plotva});
+    static Location homeLoc1 = new Location("/res/Home/Loc_1_Day.jpg", "/res/Home/Loc_1_Night.jpg", 200, 200, new FishList.Fish[]{FishList.plotva});
+    static Location homeLoc2 = new Location("/res/Home/Loc_2_Day.jpg", "/res/Home/Loc_2_Night.jpg", 390, 230, new FishList.Fish[]{FishList.plotva});
 
 
 

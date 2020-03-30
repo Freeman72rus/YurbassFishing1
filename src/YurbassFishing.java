@@ -28,6 +28,12 @@ public class YurbassFishing implements ActionListener {
     JLabel exitLabel;
     static int userSelect = 0;//Выбранный сейчас юзер, по умолчанию самый первый созданный, дописать метод выбора профиля игрока при входе
     static int countSpin = 0;//глобальный счетчик спиннингов купленных в этом профиле
+    final ImageIcon loc = new ImageIcon(YurbassFishing.class.getResource("/Image/interface/LocationButton.png"));
+    final ImageIcon fishBase = new ImageIcon(YurbassFishing.class.getResource("/Image/interface/FishBaseButton.png"));
+    final ImageIcon cage = new ImageIcon(YurbassFishing.class.getResource("/Image/interface/CageButton.png"));
+    final ImageIcon inventory = new ImageIcon(YurbassFishing.class.getResource("/Image/interface/InventoryButton.png"));
+    final ImageIcon save = new ImageIcon(YurbassFishing.class.getResource("/Image/interface/SaveButton.png"));
+    final ImageIcon exit = new ImageIcon(YurbassFishing.class.getResource("/Image/interface/ExitButton.png"));
 
     YurbassFishing(){
         menu = new JFrame("Yurbass Fishing. Главное меню");
@@ -37,32 +43,32 @@ public class YurbassFishing implements ActionListener {
         menu.setLocationRelativeTo(null);
         menu.setResizable(false);
 
-        locationListButton = new JButton(new ImageIcon("src\\Image\\interface\\LocationButton.png"));
+        locationListButton = new JButton(loc);
         locationListButton.setBounds(200,50,65,60);
         locationListLabel = new JLabel("");
         locationListLabel.setBounds(177,115,150,15);
 
-        fishBaseButton = new JButton(new ImageIcon("src\\Image\\interface\\FishBaseButton.png"));
+        fishBaseButton = new JButton(fishBase);
         fishBaseButton.setBounds(350, 180, 65,60);
         fishBaseLabel = new JLabel("");
         fishBaseLabel.setBounds(342,245,150,15);
 
-        cageButton = new JButton(new ImageIcon("src\\Image\\interface\\CageButton.png"));
+        cageButton = new JButton(cage);
         cageButton.setBounds(43,180,85,60);
         cageLabel = new JLabel("");
         cageLabel.setBounds(44,245,150,15);
 
-        inventoryButton = new JButton(new ImageIcon("src\\Image\\interface\\InventoryButton.png"));
+        inventoryButton = new JButton(inventory);
         inventoryButton.setBounds(50,310,65,60);
         inventoryLabel = new JLabel("");
         inventoryLabel.setBounds(51,375,150,15);
 
-        saveButton = new JButton(new ImageIcon("src\\Image\\interface\\SaveButton.png"));
+        saveButton = new JButton(save);
         saveButton.setBounds(350,310,65,60);
         saveLabel = new JLabel("");
         saveLabel.setBounds(347,375,150,15);
 
-        exitButton = new JButton(new ImageIcon("src\\Image\\interface\\ExitButton.png"));
+        exitButton = new JButton(exit);
         exitButton.setBounds(200,440,65,60);
         exitLabel = new JLabel("");
         exitLabel.setBounds(215,505,150,15);

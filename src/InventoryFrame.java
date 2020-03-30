@@ -57,13 +57,13 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
         panel.setBounds(0,0,800,600);
         panel.setLayout(null);
         //кнопку назад и разное
-        backButton = new JButton(new ImageIcon("src\\\\Image\\\\interface\\\\in_back.png"));
-        backButton.setRolloverIcon(new ImageIcon("src\\\\Image\\\\interface\\\\in_back1.png"));
+        backButton = new JButton(new ImageIcon(InventoryFrame.class.getResource("/Image/interface/in_back.png")));
+        backButton.setRolloverIcon(new ImageIcon(InventoryFrame.class.getResource("/Image/interface/in_back1.png")));
         buttonSetting(backButton);
         backButton.setActionCommand("выход");
         backButton.setBounds(685,524,85,30);
-        differButton = new JButton(new ImageIcon("src\\\\Image\\\\interface\\\\in_differ.png"));
-        differButton.setRolloverIcon(new ImageIcon("src\\\\Image\\\\interface\\\\in_differ1.png"));
+        differButton = new JButton(new ImageIcon(InventoryFrame.class.getResource("/Image/interface/in_differ.png")));
+        differButton.setRolloverIcon(new ImageIcon(InventoryFrame.class.getResource("/Image/interface/in_differ1.png")));
         buttonSetting(differButton);
         differButton.setActionCommand("разное");
         differButton.setBounds(685, 492, 85,30);
@@ -104,7 +104,7 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
             public void actionPerformed(ActionEvent actionEvent) {
                 spinIndex = spinCB.getSelectedIndex();
                 System.out.println(SelectUser.tacklesList[spinIndex].spinT.spinCount +"tax");
-                spinImage.setIcon(new ImageIcon(UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[spinIndex].spinPathImage));
+                spinImage.setIcon(UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[spinIndex].spinPathImage);
                 spinImage.setBounds(100,150,200,200);
                 try{
                     for (int k = 0; k< SelectUser.tacklesList.length; k++){
@@ -144,19 +144,20 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
                     }
                     else lineInfo.setText("");
                     if ( SelectUser.tacklesList[spinIndex].hookT != null){
-                        hookImage.setIcon(new ImageIcon( SelectUser.tacklesList[spinIndex].hookT.hookPathImage));
-                        hookImage.setBounds(200,200,100,100);
+                        hookImage.setIcon(SelectUser.tacklesList[spinIndex].hookT.hookPathImage);
+                        hookImage.setBounds(310,320,80,80);
                     }
+                    else hookImage.setIcon(null);
                 /*if (tacklesList[spinIndex].spoonT != null){
                     spoonImage.setIcon(new ImageIcon(tacklesList[spinIndex].spoonT.spoonPathImage));
                     spoonImage.setBounds(200,300,100,100);
                 }*/
                     if ( SelectUser.tacklesList[spinIndex].baitsT != null){
-                        baitsImage.setIcon(new ImageIcon( SelectUser.tacklesList[spinIndex].baitsT.baitsPathImage));
+                        baitsImage.setIcon( SelectUser.tacklesList[spinIndex].baitsT.baitsPathImage);
                         baitsImage.setBounds(200,400,100,100);
                     }
                     if ( SelectUser.tacklesList[spinIndex].katushkaT != null){
-                        katImage.setIcon(new ImageIcon( SelectUser.tacklesList[spinIndex].katushkaT.katPathImage));
+                        katImage.setIcon( SelectUser.tacklesList[spinIndex].katushkaT.katPathImage);
                         katImage.setBounds(200,500,100,100);
                     }
                 }
@@ -204,7 +205,7 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
                     if (j != -1&&UserList.users[YurbassFishing.userSelect].inventory.hooksUser[i].tackleNumber == -1){
                         UserList.users[YurbassFishing.userSelect].inventory.hooksUser[i].tackleNumber =  SelectUser.tacklesList[j].spinT.spinCount;
                          SelectUser.tacklesList[j].hookT = UserList.users[YurbassFishing.userSelect].inventory.hooksUser[i];
-                        hookImage.setText("<html>Крючки<br>" +  ((int) SelectUser.tacklesList[spinIndex].hookT.hookQuantity) + " шт<br>");
+                        hookImage.setIcon(SelectUser.tacklesList[spinIndex].hookT.hookPathImage);
                     }
                     else if (UserList.users[YurbassFishing.userSelect].inventory.hooksUser[i].tackleNumber != -1){
                         info.setText("Крючки установлены на комплект " + (UserList.users[YurbassFishing.userSelect].inventory.hooksUser[i].tackleNumber+1));
@@ -257,7 +258,7 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
         mouseClicY = mouseEvent.getY();
         spinIndex = spinCB.getSelectedIndex();
         try{
-            if (mouseClicX>310&&mouseClicX<415&&mouseClicY>200&&mouseClicY<295){
+            if (mouseClicX>308&&mouseClicX<415&&mouseClicY>200&&mouseClicY<295){
                 if (mouseEvent.getClickCount() == 2){
                     lineInfo.setText("");
                     for (int k = 0; k<UserList.users[YurbassFishing.userSelect].inventory.linesUser.length;k++){
@@ -265,6 +266,17 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
                             UserList.users[YurbassFishing.userSelect].inventory.linesUser[k].tackleNumber = -1;
                             UserList.users[YurbassFishing.userSelect].inventory.linesUser[k].tackleSelect = false;
                             SelectUser.tacklesList[spinIndex].lineT.tackleNumber = -1;
+                        }
+                    }
+                }
+            }
+            if (mouseClicX>308&&mouseClicX<415&&mouseClicY>320&&mouseClicY<417){
+                if (mouseEvent.getClickCount() == 2){
+                    hookImage.setIcon(null);
+                    for (int k = 0; k<UserList.users[YurbassFishing.userSelect].inventory.hooksUser.length;k++){
+                        if (UserList.users[YurbassFishing.userSelect].inventory.hooksUser[k].tackleNumber == SelectUser.tacklesList[spinIndex].hookT.tackleNumber){
+                            UserList.users[YurbassFishing.userSelect].inventory.hooksUser[k].tackleNumber = -1;
+                            SelectUser.tacklesList[spinIndex].hookT.tackleNumber = -1;
                         }
                     }
                 }
@@ -419,7 +431,7 @@ class InventoryPanel extends JPanel{
     BufferedImage imageBackground;
     protected void paintComponent(Graphics g){
         try {
-            imageBackground = ImageIO.read(new File("src\\Image\\interface\\invent.jpg"));
+            imageBackground = ImageIO.read(getClass().getResource("/Image/interface/invent.jpg"));
             g.drawImage(imageBackground, 0,0, null);
         } catch (IOException e) {
             e.printStackTrace();

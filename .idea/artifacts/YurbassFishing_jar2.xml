@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="YurbassFishing:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/YurbassFishing_jar2</output-path>
+    <root id="archive" name="YurbassFishing.jar">
+      <element id="module-output" name="YurbassFishing" />
+    </root>
+  </artifact>
+</component>

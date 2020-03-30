@@ -28,6 +28,21 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
     JLabel infoButLab;
     YurbassFishing yf = new YurbassFishing();
     Shop shop;
+    final ImageIcon shopIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_sh.gif"));
+    final ImageIcon menuIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_menu.gif"));
+    final ImageIcon fishOcIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_fo.gif"));
+    final ImageIcon fishAllSellIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_fc.gif"));
+    final ImageIcon informIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_info.gif"));
+    final ImageIcon mapIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_map.gif"));
+    final ImageIcon clubIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_club.gif"));
+    final ImageIcon licenseIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_lic.gif"));
+    final ImageIcon recordIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_rec.gif"));
+    final ImageIcon foodShopIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_food.gif"));
+    final ImageIcon houseShopIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_house.gif"));
+    final ImageIcon autoShopIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_auto.gif"));
+    final ImageIcon tourShopIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_tour.gif"));
+    final ImageIcon regTurnirIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_reg.gif"));
+    final ImageIcon barIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_bar.gif"));
 
     FishBase(){
         yf.menu.setVisible(false);
@@ -39,7 +54,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
         fb.setVisible(true);
         fb.setResizable(false);
 
-        shopButton = new JButton(new ImageIcon("src\\Image\\interface\\b_sh.gif"));
+        shopButton = new JButton(shopIm);
         shopButton.setBounds(50,150,65,65);
         shopButton.addActionListener(this);
         shopButton.setActionCommand("shop");
@@ -53,7 +68,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
             }
         });
 
-        buttonMenu = new JButton(new ImageIcon("src\\Image\\interface\\b_menu.gif"));
+        buttonMenu = new JButton(menuIm);
         buttonMenu.setBounds(700,490,65,65);
         buttonMenu.addActionListener(this);
         buttonMenu.setActionCommand("menu");
@@ -68,7 +83,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
         });
 
 
-        fishOcenButton = new JButton(new ImageIcon("src\\Image\\interface\\b_fo.gif"));
+        fishOcenButton = new JButton(fishOcIm);
         fishOcenButton.setBounds(125,150,65,65);
         fishOcenButton.addActionListener(this);
         fishOcenButton.setActionCommand("ocenka");
@@ -82,7 +97,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
             }
         });
 
-        fishAllSellButton = new JButton(new ImageIcon("src\\Image\\interface\\b_fc.gif"));
+        fishAllSellButton = new JButton(fishAllSellIm);
         fishAllSellButton.setBounds(200,150,65,65);
         fishAllSellButton.addActionListener(this);
         fishAllSellButton.setActionCommand("sellFish");
@@ -96,7 +111,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
             }
         });
 
-        informButton = new JButton(new ImageIcon("src\\Image\\interface\\b_info.gif"));
+        informButton = new JButton(informIm);
         informButton.setBounds(275,150,65,65);
         informButton.addActionListener(this);
         informButton.setActionCommand("inform");
@@ -110,7 +125,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
             }
         });
 
-        mapButton = new JButton(new ImageIcon("src\\Image\\interface\\b_map.gif"));
+        mapButton = new JButton(mapIm);
         mapButton.setBounds(350,150,65,65);
         mapButton.addActionListener(this);
         mapButton.setActionCommand("maps");
@@ -124,7 +139,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
             }
         });
 
-        clubButton = new JButton(new ImageIcon("src\\Image\\interface\\b_club.gif"));
+        clubButton = new JButton(clubIm);
         clubButton.setBounds(425,150,65,65);
         clubButton.addActionListener(this);
         clubButton.setActionCommand("club");
@@ -138,7 +153,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
             }
         });
 
-        licenceButton = new JButton(new ImageIcon("src\\Image\\interface\\b_lic.gif"));
+        licenceButton = new JButton(licenseIm);
         licenceButton.setBounds(500,150,65,65);
         licenceButton.addActionListener(this);
         licenceButton.setActionCommand("licence");
@@ -152,7 +167,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
             }
         });
 
-        recordButton = new JButton(new ImageIcon("src\\Image\\interface\\b_rec.gif"));
+        recordButton = new JButton(recordIm);
         recordButton.setBounds(575,150,65,65);
         recordButton.addActionListener(this);
         recordButton.setActionCommand("record");
@@ -167,7 +182,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
         });
 
 
-        foodShopButton = new JButton(new ImageIcon("src\\Image\\interface\\b_food.gif"));
+        foodShopButton = new JButton(foodShopIm);
         foodShopButton.setBounds(650,150,65,65);
         foodShopButton.addActionListener(this);
         foodShopButton.setActionCommand("food");
@@ -181,7 +196,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
             }
         });
 
-        houseShopButton = new JButton(new ImageIcon("src\\Image\\interface\\b_house.gif"));
+        houseShopButton = new JButton(houseShopIm);
         houseShopButton.setBounds(200,225,65,65);
         houseShopButton.addActionListener(this);
         houseShopButton.setActionCommand("house");
@@ -195,7 +210,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
             }
         });
 
-        autoShopButton = new JButton(new ImageIcon("src\\Image\\interface\\b_auto.gif"));
+        autoShopButton = new JButton(autoShopIm);
         autoShopButton.setBounds(275,225,65,65);
         autoShopButton.addActionListener(this);
         autoShopButton.setActionCommand("auto");
@@ -209,7 +224,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
             }
         });
 
-        tourShopButton = new JButton(new ImageIcon("src\\Image\\interface\\b_tour.gif"));
+        tourShopButton = new JButton(tourShopIm);
         tourShopButton.setBounds(350,225,65,65);
         tourShopButton.addActionListener(this);
         tourShopButton.setActionCommand("tour");
@@ -223,7 +238,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
             }
         });
 
-        regTurnirButton = new JButton(new ImageIcon("src\\Image\\interface\\b_reg.gif"));
+        regTurnirButton = new JButton(regTurnirIm);
         regTurnirButton.setBounds(425,225,65,65);
         regTurnirButton.addActionListener(this);
         regTurnirButton.setActionCommand("turnir");
@@ -237,7 +252,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
             }
         });
 
-        barButton = new JButton(new ImageIcon("src\\Image\\interface\\b_bar.gif"));
+        barButton = new JButton(barIm);
         barButton.setBounds(500,225,65,65);
         barButton.addActionListener(this);
         barButton.setActionCommand("bar");

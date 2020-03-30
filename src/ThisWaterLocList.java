@@ -11,6 +11,8 @@ class ThisWaterLocList implements MouseListener{
     int mouseClicX;
     int mouseClicY;
     JButton[] buttonLoc;
+    final ImageIcon butLocIm = new ImageIcon(ThisWaterLocList.class.getResource("/Image/interface/locbutton.gif"));
+    final ImageIcon butLocIm2 = new ImageIcon(ThisWaterLocList.class.getResource("/Image/interface/locbutton2.gif"));
     ThisWaterLocList(){
         yf.menu.setVisible(false);
         locListFrame = new JFrame();
@@ -30,13 +32,13 @@ class ThisWaterLocList implements MouseListener{
             if (BaseList.baseList[i].name.equals(UserList.users[YurbassFishing.userSelect].baseNow)){
                 for (int j =0; j<BaseList.baseList[i].locationsList.length; j++){
                     buttonLoc = new JButton[BaseList.baseList[i].locationsList.length];
-                    buttonLoc[i] = new JButton(new ImageIcon("src\\Image\\interface\\locbutton.gif"));
+                    buttonLoc[i] = new JButton(butLocIm);
                     buttonLoc[i].setBounds(BaseList.baseList[i].locationsList[j].x, BaseList.baseList[i].locationsList[j].y, 45,42);
                     buttonLoc[i].setBorderPainted(false);
                     buttonLoc[i].setFocusPainted(false);
                     buttonLoc[i].setContentAreaFilled(false);
-                    buttonLoc[i].setPressedIcon(new ImageIcon("src\\Image\\interface\\locbutton2.gif"));
-                    buttonLoc[i].setRolloverIcon(new ImageIcon("src\\Image\\interface\\locbutton2.gif"));
+                    buttonLoc[i].setPressedIcon(butLocIm2);
+                    buttonLoc[i].setRolloverIcon(butLocIm2);
                     panel.add(buttonLoc[i]);
                 }
             }
@@ -96,11 +98,12 @@ class LocPanel extends JPanel{
     BufferedImage background;
     BufferedImage locMap;
     BufferedImage globus;
+    final ImageIcon backgroundIm = new ImageIcon(LocPanel.class.getResource("/Image/interface/mapsmall_background.jpg"));
     protected void paintComponent(Graphics g){
         try {
-            background = ImageIO.read(new File("src\\\\Image\\\\interface\\\\mapsmall background.jpg"));
-            locMap = ImageIO.read(new File(ThisWaterLocList.imgPath(UserList.users[YurbassFishing.userSelect].baseNow)));
-            globus = ImageIO.read(new File("src\\\\Image\\\\interface\\\\globus.gif"));
+            background = ImageIO.read(getClass().getResource("/Image/interface/mapsmall_background.jpg"));
+            locMap = ImageIO.read(getClass().getResource(ThisWaterLocList.imgPath(UserList.users[YurbassFishing.userSelect].baseNow)));
+            globus = ImageIO.read(getClass().getResource("/Image/interface/globus.gif"));
             g.drawImage(background, 0,0, null);
             g.drawImage(locMap, 75,60, null);
             g.drawImage(globus, 185,560, null);
