@@ -5,12 +5,13 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-class ThisWaterLocList implements MouseListener{
+class ThisWaterLocList implements ActionListener{
     JFrame locListFrame;
     YurbassFishing yf = new YurbassFishing();
     int mouseClicX;
     int mouseClicY;
     JButton[] buttonLoc;
+    JButton backButton;
     final ImageIcon butLocIm = new ImageIcon(ThisWaterLocList.class.getResource("/Image/interface/locbutton.gif"));
     final ImageIcon butLocIm2 = new ImageIcon(ThisWaterLocList.class.getResource("/Image/interface/locbutton2.gif"));
     ThisWaterLocList(){
@@ -25,8 +26,15 @@ class ThisWaterLocList implements MouseListener{
         LocPanel panel = new LocPanel();
         panel.setBounds(0,0,800,600);
         panel.setLayout(null);
-        locListFrame.addMouseListener(this);
         locListFrame.add(panel);
+        backButton = new JButton("");
+        backButton.setBorderPainted(false);
+        backButton.setFocusPainted(false);
+        backButton.setContentAreaFilled(false);
+        backButton.addActionListener(this);
+        backButton.setActionCommand("back");
+        backButton.setBounds(80, 560,140,20);
+        panel.add(backButton);
 
         for (int i =0; i<BaseList.baseList.length; i++){
             if (BaseList.baseList[i].name.equals(UserList.users[YurbassFishing.userSelect].baseNow)){
@@ -54,37 +62,7 @@ class ThisWaterLocList implements MouseListener{
             }
         });
     }
-    @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
-        mouseClicX = mouseEvent.getX();
-        mouseClicY = mouseEvent.getY();
-        if (mouseEvent.getX()>80&&mouseEvent.getX()<220&&mouseEvent.getY()>560&&mouseEvent.getY()<580){
-            yf.menu.setVisible(true);
-            locListFrame.setVisible(false);
-            locListFrame.dispose();
-        }
-        //locListFrame.repaint();
-    }
 
-    @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent mouseEvent) {
-
-    }
     static String imgPath(String s){//метод возвращает путь к картинке расположения локаций базы на которой сейчас игрок
         for (int i = 0; i< BaseList.baseList.length; i++){
             if (BaseList.baseList[i].name.equals(s)){
@@ -92,6 +70,15 @@ class ThisWaterLocList implements MouseListener{
             }
         }
         return s;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("back")){
+            yf.menu.setVisible(true);
+            locListFrame.setVisible(false);
+            locListFrame.dispose();
+        }
     }
 }
 class LocPanel extends JPanel{

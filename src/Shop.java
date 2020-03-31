@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-class Shop extends JFrame implements MouseListener, ActionListener, ChangeListener {//Класс реализует магазин товаров
+class Shop extends JFrame implements ActionListener, ChangeListener {//Класс реализует магазин товаров
     JFrame shopF;
     FishBase fb = new FishBase();;
     int mouseClicX;
@@ -43,6 +43,7 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
     JButton spoonButton = new JButton("");
     JButton baitsButton = new JButton("");
     JButton katushkaButton = new JButton("");
+    JButton backButton;
     ImageIcon[] spinImage = {new ImageIcon(Shop.class.getResource("/Image/dev/sp_lord.jpg")), new ImageIcon(Shop.class.getResource("/Image/dev/sp_cottus 000.jpg"))};
     ImageIcon[] lineImage = {new ImageIcon(Shop.class.getResource("/Image/dev/leska.jpg"))};
     ImageIcon[] hookImage = {new ImageIcon(Shop.class.getResource("/Image/dev/hk_viper.jpg")), new ImageIcon(Shop.class.getResource("/Image/dev/hk_fisher.jpg"))};
@@ -87,6 +88,14 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
         buyInfo.setFont(new Font("Arial", Font.PLAIN, 14));
         buyInfo.setForeground(Color.BLACK);
         buyInfo.setBounds(5,520,300,15);
+        backButton = new JButton("");
+        backButton.setBorderPainted(false);
+        backButton.setFocusPainted(false);
+        backButton.setContentAreaFilled(false);
+        backButton.addActionListener(this);
+        backButton.setActionCommand("back");
+        backButton.setBounds(660, 530,120,30);
+        panel.add(backButton);
 
         panel.add(imageLabel);
         panel.add(info1);
@@ -95,7 +104,6 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
         panel.add(userMoney);
         panel.add(buyInfo);
         shopF.add(panel);
-        shopF.addMouseListener(this);
 
         jlistSpin = new JList(spinningsList);
         jlistLine = new JList(linesList);
@@ -483,36 +491,6 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
         });
     }
 
-    @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
-        mouseClicX = mouseEvent.getX();
-        mouseClicY = mouseEvent.getY();
-        if (mouseEvent.getX()>660&&mouseEvent.getY()>560){
-            fb.fb.setVisible(true);
-            shopF.setVisible(false);
-            shopF.dispose();
-        }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent mouseEvent) {
-
-    }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
@@ -533,6 +511,11 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
         }
         else if (ae.getActionCommand().equals("kat")){
             jtab.setSelectedIndex(5);
+        }
+        else if (ae.getActionCommand().equals("back")){
+            fb.fb.setVisible(true);
+            shopF.setVisible(false);
+            shopF.dispose();
         }
     }
 
