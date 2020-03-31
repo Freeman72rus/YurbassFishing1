@@ -361,7 +361,7 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
                         userMoney.setText(UserList.users[YurbassFishing.userSelect].userMoney + " руб.");
                         for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.katUser.length; j++){
                             if (UserList.users[YurbassFishing.userSelect].inventory.katUser[j] == null){
-                                UserList.users[YurbassFishing.userSelect].inventory.katUser[j] = KatushkaList.katushkaList[i];
+                                UserList.users[YurbassFishing.userSelect].inventory.katUser[j] = new KatushkaList.Katushka(KatushkaList.katushkaList[i].katName, KatushkaList.katushkaList[i].katPathImage, KatushkaList.katushkaList[i].katSmallImage, KatushkaList.katushkaList[i].katCapacity, KatushkaList.katushkaList[i].katPodshipQuantity, KatushkaList.katushkaList[i].katPrice, KatushkaList.katushkaList[i].katSafety, KatushkaList.katushkaList[i].tackleNumber);
                                 buyInfo.setText("Куплено: " + katushkasList[i]);
                                 break;
                             }
