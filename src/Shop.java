@@ -322,13 +322,27 @@ class Shop extends JFrame implements MouseListener, ActionListener, ChangeListen
                     if (UserList.users[YurbassFishing.userSelect].userMoney >= BaitsList.baitsList[i].baitsPrice){
                         UserList.users[YurbassFishing.userSelect].userMoney -= BaitsList.baitsList[i].baitsPrice;
                         userMoney.setText(UserList.users[YurbassFishing.userSelect].userMoney + " руб.");
+                        boolean flag = false;
                         for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.baitsUser.length; j++){
                             if (UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j] == null){
-                                UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j] = BaitsList.baitsList[i];
+                                continue;
+                            }
+                            if (BaitsList.baitsList[i].baitsName.equals(UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j].baitsName)){
+                                UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j].baitsQuantity += BaitsList.baitsList[i].baitsQuantity;
+                                flag = true;
                                 buyInfo.setText("Куплено: " + baitsList[i]);
                                 break;
                             }
-                            else buyInfo.setText("Нет места для этой категории товара");
+                        }
+                        if (flag != true){
+                            for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.baitsUser.length; j++){
+                                if (UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j] == null){
+                                    UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j] = new BaitsList.Baits(BaitsList.baitsList[i].baitsName, BaitsList.baitsList[i].baitsPathImage, BaitsList.baitsList[i].baitsSmallImage, BaitsList.baitsList[i].baitsType, BaitsList.baitsList[i].baitsQuantity, BaitsList.baitsList[i].baitsPrice, BaitsList.baitsList[i].tackleNumber);
+                                    buyInfo.setText("Куплено: " + baitsList[i]);
+                                    break;
+                                }
+                                else buyInfo.setText("Нет места для этой категории товара");
+                            }
                         }
                     }
                     else buyInfo.setText("Не хватает средств");
