@@ -26,6 +26,7 @@ public class YurbassFishing implements ActionListener {
     JLabel inventoryLabel;
     JLabel saveLabel;
     JLabel exitLabel;
+    static JLabel clock = new JLabel("");
     static int userSelect = 0;//Выбранный сейчас юзер, по умолчанию самый первый созданный, дописать метод выбора профиля игрока при входе
     static int countSpin = 0;//глобальный счетчик спиннингов купленных в этом профиле
     final ImageIcon loc = new ImageIcon(YurbassFishing.class.getResource("/Image/interface/LocationButton.png"));
@@ -34,6 +35,16 @@ public class YurbassFishing implements ActionListener {
     final ImageIcon inventory = new ImageIcon(YurbassFishing.class.getResource("/Image/interface/InventoryButton.png"));
     final ImageIcon save = new ImageIcon(YurbassFishing.class.getResource("/Image/interface/SaveButton.png"));
     final ImageIcon exit = new ImageIcon(YurbassFishing.class.getResource("/Image/interface/ExitButton.png"));
+    static int time = 0;
+    static int hours = 0;
+    static int minutes =0;
+    static int days = 1;
+    static int month = 1;
+    static int years = 2020;
+    static String daysWeek = "Среда";
+    static int daysWeekCount = 3;
+    static String clockStr;
+
 
     YurbassFishing(){
         menu = new JFrame("Yurbass Fishing. Главное меню");
@@ -42,6 +53,9 @@ public class YurbassFishing implements ActionListener {
         menu.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         menu.setLocationRelativeTo(null);
         menu.setResizable(false);
+
+        clock.setBounds(370,40,100,100);
+        clock.setText("<html>" + hours + ":" + minutes + "<br>" + daysWeek + "<br>" + days + "." + month + "." + years + "<br>");
 
         locationListButton = new JButton(loc);
         locationListButton.setBounds(200,50,65,60);
@@ -138,6 +152,16 @@ public class YurbassFishing implements ActionListener {
                 else cageLabel.setText("");
             }
         });
+
+        Timer timer = new Timer(1, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                timeCounter();
+            }
+        });
+        timer.start();
+
+
         menu.add(locationListButton);
         menu.add(fishBaseButton);
         menu.add(inventoryButton);
@@ -150,6 +174,7 @@ public class YurbassFishing implements ActionListener {
         menu.add(inventoryLabel);
         menu.add(saveLabel);
         menu.add(exitLabel);
+        menu.add(clock);
 
         menu.setVisible(true);
     }
@@ -190,6 +215,77 @@ public class YurbassFishing implements ActionListener {
             menu.setVisible(false);
             menu.dispose();
         }
+    }
+    static void timeCounter(){
+        if (time<10){
+            time +=1;
+        }
+        else time = 1;
+        System.out.println(time);
+        if (time == 10){
+            minutes +=10;
+            if (minutes == 60){
+                minutes = 0;
+                hours +=1;
+                if (hours == 24){
+                    daysWeekCount += 1;
+                    days += 1;
+                    hours = 0;
+                    if (daysWeekCount >7){
+                        daysWeekCount = 1;
+                    }
+                    if ((month == 1||month == 3||month == 5||month == 7||month == 8||month == 10||month == 12)&&days>31){
+                        days = 1;
+                        month +=1;
+                        if (month>12){
+                            years+=1;
+                            month = 1;
+                        }
+                    }
+                    if ((month == 4||month == 6||month == 9||month == 11)&&days>30){
+                        days = 1;
+                        month +=1;
+                    }
+                    if (month == 2&&days>28){
+                        days = 1;
+                        month +=1;
+                    }
+                }
+            }
+        }
+        switch (daysWeekCount){
+            case 1: daysWeek = "Понедельник";
+                break;
+            case 2: daysWeek = "Вторник";
+                break;
+            case 3: daysWeek = "Среда";
+                break;
+            case 4: daysWeek = "Четверг";
+                break;
+            case 5: daysWeek = "Пятница";
+                break;
+            case 6: daysWeek = "Суббота";
+                break;
+            case 7: daysWeek = "Воскресение";
+                break;
+        }
+        //clock.setText("<html>" + hours + ":" + minutes + "<br>" + daysWeek + "<br>" + days + "." + month + "." + years + "<br>");
+        if (hours <10){
+            clockStr = "<html>0"+hours;
+        }
+        else clockStr = "<html>" + hours;
+        clockStr += ":" + minutes + "<br>" + daysWeek + "<br>";
+        if (days<10){
+            clockStr += "0" + days + ".";
+        }
+        else clockStr += days + ".";
+        if (month<10){
+            clockStr += "0" + month;
+        }
+        else clockStr += month;
+        clockStr += "." + years;
+        clock.setText(clockStr);
+
     }
     static void saveGame(){
         String inventSpin = "";
