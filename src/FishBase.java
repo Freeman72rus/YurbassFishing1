@@ -26,6 +26,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
     JButton regTurnirButton;
     JButton barButton;
     JLabel infoButLab;
+    static JLabel clock = new JLabel(YurbassFishing.clockStr);
     YurbassFishing yf = new YurbassFishing();
     Shop shop;
     final ImageIcon shopIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_sh.gif"));
@@ -269,6 +270,9 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
         infoButLab = new JLabel("");
         infoButLab.setBounds(10,540,150,15);
         fb.add(infoButLab);
+
+        clock.setBounds(0,0,100,100);
+        fb.add(clock);
     }
 
     @Override

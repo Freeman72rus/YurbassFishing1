@@ -153,7 +153,7 @@ public class YurbassFishing implements ActionListener {
             }
         });
 
-        Timer timer = new Timer(1, new ActionListener() {
+        Timer timer = new Timer(100, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 timeCounter();
@@ -217,12 +217,11 @@ public class YurbassFishing implements ActionListener {
         }
     }
     static void timeCounter(){
-        if (time<10){
+        if (time<100){
             time +=1;
         }
         else time = 1;
-        System.out.println(time);
-        if (time == 10){
+        if (time == 100){
             minutes +=10;
             if (minutes == 60){
                 minutes = 0;
@@ -269,12 +268,14 @@ public class YurbassFishing implements ActionListener {
             case 7: daysWeek = "Воскресение";
                 break;
         }
-        //clock.setText("<html>" + hours + ":" + minutes + "<br>" + daysWeek + "<br>" + days + "." + month + "." + years + "<br>");
         if (hours <10){
             clockStr = "<html>0"+hours;
         }
         else clockStr = "<html>" + hours;
-        clockStr += ":" + minutes + "<br>" + daysWeek + "<br>";
+        if (minutes == 0){
+            clockStr += ":" + minutes + "0<br>" + daysWeek + "<br>";
+        }
+        else clockStr += ":" + minutes + "<br>" + daysWeek + "<br>";
         if (days<10){
             clockStr += "0" + days + ".";
         }
@@ -285,6 +286,7 @@ public class YurbassFishing implements ActionListener {
         else clockStr += month;
         clockStr += "." + years;
         clock.setText(clockStr);
+        FishBase.clock.setText(clockStr);
 
     }
     static void saveGame(){
