@@ -44,6 +44,7 @@ public class YurbassFishing implements ActionListener {
     static String daysWeek = "Среда";
     static int daysWeekCount = 3;
     static String clockStr;
+    static BaseList.Base nowBase = BaseList.home;
 
 
     YurbassFishing(){

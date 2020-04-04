@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 class ThisWaterLocList implements ActionListener{
-    JFrame locListFrame;
+    static JFrame locListFrame;
     YurbassFishing yf = new YurbassFishing();
     int mouseClicX;
     int mouseClicY;
@@ -14,6 +14,8 @@ class ThisWaterLocList implements ActionListener{
     JButton backButton;
     final ImageIcon butLocIm = new ImageIcon(ThisWaterLocList.class.getResource("/Image/interface/locbutton.gif"));
     final ImageIcon butLocIm2 = new ImageIcon(ThisWaterLocList.class.getResource("/Image/interface/locbutton2.gif"));
+    static LocationList.Location nowLoc = null;
+    LocFrame locFrame;
     ThisWaterLocList(){
         yf.menu.setVisible(false);
         locListFrame = new JFrame();
@@ -47,6 +49,8 @@ class ThisWaterLocList implements ActionListener{
                     buttonLoc[i].setContentAreaFilled(false);
                     buttonLoc[i].setPressedIcon(butLocIm2);
                     buttonLoc[i].setRolloverIcon(butLocIm2);
+                    buttonLoc[i].addActionListener(this);
+                    buttonLoc[i].setActionCommand(String.valueOf(j));
                     panel.add(buttonLoc[i]);
                 }
             }
@@ -79,13 +83,25 @@ class ThisWaterLocList implements ActionListener{
             locListFrame.setVisible(false);
             locListFrame.dispose();
         }
+        int locSel = -1;
+        try{
+            locSel = Integer.parseInt(e.getActionCommand());
+        }
+        catch (Exception ex){
+
+        }
+        if (locSel>-1){
+            nowLoc = YurbassFishing.nowBase.locationsList[locSel];
+            locFrame = new LocFrame();
+            locListFrame.setVisible(false);
+            locListFrame.dispose();
+        }
     }
 }
 class LocPanel extends JPanel{
     BufferedImage background;
     BufferedImage locMap;
     BufferedImage globus;
-    final ImageIcon backgroundIm = new ImageIcon(LocPanel.class.getResource("/Image/interface/mapsmall_background.jpg"));
     protected void paintComponent(Graphics g){
         try {
             background = ImageIO.read(getClass().getResource("/Image/interface/mapsmall_background.jpg"));
