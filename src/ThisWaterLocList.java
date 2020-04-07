@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 class ThisWaterLocList implements ActionListener{
     static JFrame locListFrame;
-    YurbassFishing yf = new YurbassFishing();
     int mouseClicX;
     int mouseClicY;
     JButton[] buttonLoc;
@@ -16,8 +15,9 @@ class ThisWaterLocList implements ActionListener{
     final ImageIcon butLocIm2 = new ImageIcon(ThisWaterLocList.class.getResource("/Image/interface/locbutton2.gif"));
     static LocationList.Location nowLoc = null;
     LocFrame locFrame;
+    static boolean flagEnterLoc = false;
     ThisWaterLocList(){
-        yf.menu.setVisible(false);
+        YurbassFishing.menu.setVisible(false);
         locListFrame = new JFrame();
         locListFrame.setSize(800,600);
         locListFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -51,6 +51,7 @@ class ThisWaterLocList implements ActionListener{
                     buttonLoc[i].setRolloverIcon(butLocIm2);
                     buttonLoc[i].addActionListener(this);
                     buttonLoc[i].setActionCommand(String.valueOf(j));
+                    buttonLoc[i].setToolTipText(YurbassFishing.nowBase.locationsList[j].locName);
                     panel.add(buttonLoc[i]);
                 }
             }
@@ -79,7 +80,7 @@ class ThisWaterLocList implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("back")){
-            yf.menu.setVisible(true);
+            YurbassFishing.menu.setVisible(true);
             locListFrame.setVisible(false);
             locListFrame.dispose();
         }
@@ -95,6 +96,7 @@ class ThisWaterLocList implements ActionListener{
             locFrame = new LocFrame();
             locListFrame.setVisible(false);
             locListFrame.dispose();
+            flagEnterLoc = true;
         }
     }
 }

@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class YurbassFishing implements ActionListener {
+    static final int weight = 800;
+    static final int height = 600;
     JButton locationListButton;//кнопка перехода на локации
     JButton fishBaseButton;//кнопка перехода на рыболовную базу
     JButton saveButton;//кнопка сохранения
@@ -19,7 +21,7 @@ public class YurbassFishing implements ActionListener {
     FishBase fb;
     ThisWaterLocList loclistFrame;
     InventoryFrame inventoryFrame;
-    JFrame menu;
+    static JFrame menu;
     JLabel locationListLabel;
     JLabel fishBaseLabel;
     JLabel cageLabel;
@@ -44,6 +46,7 @@ public class YurbassFishing implements ActionListener {
     static String daysWeek = "Среда";
     static int daysWeekCount = 3;
     static String clockStr;
+    static String clockStr2;
     static BaseList.Base nowBase = BaseList.home;
 
 
@@ -193,12 +196,10 @@ public class YurbassFishing implements ActionListener {
         if (ae.getActionCommand().equals("base")){
             fb = new FishBase();
             menu.setVisible(false);
-            menu.dispose();
         }
         else if (ae.getActionCommand().equals("locations")){
             loclistFrame = new ThisWaterLocList();
             menu.setVisible(false);
-            menu.dispose();
         }
         else if (ae.getActionCommand().equals("save")){
             saveGame();
@@ -214,7 +215,6 @@ public class YurbassFishing implements ActionListener {
         else if (ae.getActionCommand().equals("inventory")){
             inventoryFrame = new InventoryFrame();
             menu.setVisible(false);
-            menu.dispose();
         }
     }
     static void timeCounter(){
@@ -271,12 +271,20 @@ public class YurbassFishing implements ActionListener {
         }
         if (hours <10){
             clockStr = "<html>0"+hours;
+            clockStr2 = "0" + hours;
         }
-        else clockStr = "<html>" + hours;
+        else{
+            clockStr = "<html>" + hours;
+            clockStr2 = "" + hours;
+        }
         if (minutes == 0){
             clockStr += ":" + minutes + "0<br>" + daysWeek + "<br>";
+            clockStr2 += ":" + minutes + "0";
         }
-        else clockStr += ":" + minutes + "<br>" + daysWeek + "<br>";
+        else{
+            clockStr += ":" + minutes + "<br>" + daysWeek + "<br>";
+            clockStr2 += ":" + minutes;
+        }
         if (days<10){
             clockStr += "0" + days + ".";
         }
@@ -288,6 +296,7 @@ public class YurbassFishing implements ActionListener {
         clockStr += "." + years;
         clock.setText(clockStr);
         FishBase.clock.setText(clockStr);
+        LocFrame.clock.setText(clockStr2);
 
     }
     static void saveGame(){

@@ -27,7 +27,6 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
     JButton barButton;
     JLabel infoButLab;
     static JLabel clock = new JLabel(YurbassFishing.clockStr);
-    YurbassFishing yf = new YurbassFishing();
     Shop shop;
     final ImageIcon shopIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_sh.gif"));
     final ImageIcon menuIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_menu.gif"));
@@ -46,7 +45,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
     final ImageIcon barIm = new ImageIcon(FishBase.class.getResource("/Image/interface/b_bar.gif"));
 
     FishBase(){
-        yf.menu.setVisible(false);
+        YurbassFishing.menu.setVisible(false);
         fb = new JFrame("Рыболовная база " + UserList.users[YurbassFishing.userSelect].baseNow);
         fb.setLayout(null);
         fb.setSize(800,600);
@@ -283,7 +282,7 @@ class FishBase extends JFrame implements ActionListener {//Класс описы
             fb.dispose();
         }
         else if (ae.getActionCommand().equals("menu")){
-            yf.menu.setVisible(true);
+            YurbassFishing.menu.setVisible(true);
             fb.setVisible(false);
             fb.dispose();
         }

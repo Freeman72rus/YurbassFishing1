@@ -15,14 +15,14 @@ import java.io.IOException;
 
 
 class InventoryFrame extends JFrame implements MouseListener, ActionListener, ChangeListener, MouseMotionListener {
-    JFrame inventFrame;
-    YurbassFishing yf = new YurbassFishing();
+    static JFrame inventFrame;
     JButton backButton;
     JButton differButton;
     JButton lineListButton;
     JButton hookListButton;
     JButton baitsListButton;
     JButton katListButton;
+    JButton getSpinButton;
     JLabel spinImage;
     JLabel lineInfo;
     JLabel hookImage;
@@ -56,10 +56,11 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
     int mouseClicX;
     int mouseClicY;
     int spinIndex = -1;
+    int sp;
 
 
     InventoryFrame(){
-        yf.menu.setVisible(false);
+        YurbassFishing.menu.setVisible(false);
         inventFrame = new JFrame("Инвентарь");
         inventFrame.setSize(800,600);
         inventFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -106,6 +107,15 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
         buttonSetting(katListButton);
         katListButton.setBounds(675, 395, 110, 75);
         katListButton.setActionCommand("kat");
+        getSpinButton = new JButton(new ImageIcon(InventoryFrame.class.getResource("/Image/interface/getSpin1.png")));
+        getSpinButton.setRolloverIcon(new ImageIcon(InventoryFrame.class.getResource("/Image/interface/getSpin2.png")));
+        buttonSetting(getSpinButton);
+        getSpinButton.setActionCommand("Достать");
+        getSpinButton.setBounds(110,403,85,30);
+        if (ThisWaterLocList.flagEnterLoc == true){
+            panel.add(getSpinButton);
+            getSpinButton.setEnabled(false);
+        }
 
         createAllTangleList();
 
@@ -130,6 +140,11 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
                 spinIndex = spinCB.getSelectedIndex();
                 spinImage.setIcon(UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[spinIndex].spinPathImage);
                 spinImage.setBounds(100,150,200,200);
+                System.out.println(spinIndex + "frekljg ");
+                sp = spinIndex;
+                if (spinIndex != -1){
+                    getSpinButton.setEnabled(true);
+                }
 
                 try {
                     if ( SelectUser.tacklesList[spinIndex].lineT != null&& SelectUser.tacklesList[spinIndex].lineT.tackleNumber ==  SelectUser.tacklesList[spinIndex].spinT.spinCount){
@@ -386,7 +401,13 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getActionCommand().equals("выход")){
-            yf.menu.setVisible(true);
+            if (ThisWaterLocList.flagEnterLoc == true){
+                YurbassFishing.menu.setVisible(false);
+                LocFrame.locFrame.setVisible(true);
+            }
+            else{
+                YurbassFishing.menu.setVisible(true);
+            }
             inventFrame.setVisible(false);
             inventFrame.dispose();
         }
@@ -401,6 +422,46 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
         }
         if (ae.getActionCommand().equals("kat")){
             jtab.setSelectedIndex(3);
+        }
+        if (ae.getActionCommand().equals("Достать")){
+            if (SelectUser.tacklesList[spinIndex].lineT!=null&&SelectUser.tacklesList[spinIndex].katushkaT!=null&&SelectUser.tacklesList[spinIndex].hookT!=null&&SelectUser.tacklesList[spinIndex].baitsT!=null||SelectUser.tacklesList[spinIndex].lineT!=null&&SelectUser.tacklesList[spinIndex].katushkaT!=null&&SelectUser.tacklesList[spinIndex].spoonT!=null){
+                if (LocFrame.s1 == -1){
+                    if (LocFrame.s2!=SelectUser.tacklesList[spinIndex].spinT.spinCount&&LocFrame.s3!=SelectUser.tacklesList[spinIndex].spinT.spinCount){
+                        LocFrame.s1 = SelectUser.tacklesList[spinIndex].spinT.spinCount;
+                        LocFrame.locFrame.setVisible(true);
+                        inventFrame.setVisible(false);
+                        inventFrame.dispose();
+                    }
+                    else {
+                        JOptionPane.showMessageDialog( null, "Этот спиннинг уже на воде", "", JOptionPane.DEFAULT_OPTION );
+                    }
+                }
+                else if (LocFrame.s2 == -1){
+                    if (LocFrame.s1!=SelectUser.tacklesList[spinIndex].spinT.spinCount&&LocFrame.s3!=SelectUser.tacklesList[spinIndex].spinT.spinCount){
+                        LocFrame.s2 = SelectUser.tacklesList[spinIndex].spinT.spinCount;
+                        LocFrame.locFrame.setVisible(true);
+                        inventFrame.setVisible(false);
+                        inventFrame.dispose();
+                    }
+                    else {
+                        JOptionPane.showMessageDialog( null, "Этот спиннинг уже на воде", "", JOptionPane.DEFAULT_OPTION );
+                    }
+                }
+                else if (LocFrame.s3 == -1){
+                    if (LocFrame.s1!=SelectUser.tacklesList[spinIndex].spinT.spinCount&&LocFrame.s2!=SelectUser.tacklesList[spinIndex].spinT.spinCount){
+                        LocFrame.s3 = SelectUser.tacklesList[spinIndex].spinT.spinCount;
+                        LocFrame.locFrame.setVisible(true);
+                        inventFrame.setVisible(false);
+                        inventFrame.dispose();
+                    }
+                    else {
+                        JOptionPane.showMessageDialog( null, "Этот спиннинг уже на воде", "", JOptionPane.DEFAULT_OPTION );
+                    }
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog( null, "Спиннинг собран не полностью. Необходимые компоненты: леска, катушка, блесна или крючок и наживка", "", JOptionPane.DEFAULT_OPTION );
+            }
         }
     }
 
