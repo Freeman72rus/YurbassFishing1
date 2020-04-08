@@ -195,10 +195,9 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
                         if (j != -1&&UserList.users[YurbassFishing.userSelect].inventory.linesUser[i].tackleNumber == -1){
                             UserList.users[YurbassFishing.userSelect].inventory.linesUser[i].tackleNumber =  SelectUser.tacklesList[j].spinT.spinCount;
                              SelectUser.tacklesList[j].lineT = UserList.users[YurbassFishing.userSelect].inventory.linesUser[i];
-                            UserList.users[YurbassFishing.userSelect].inventory.linesUser[i].tackleSelect = true;
                             lineInfo.setText("<html>Леска<br>" +  ((int) SelectUser.tacklesList[spinIndex].lineT.lineCapacity/1000) + " кг<br>" + "Длина " +  SelectUser.tacklesList[spinIndex].lineT.lineLength + " м");
                         }
-                        else if (UserList.users[YurbassFishing.userSelect].inventory.linesUser[i].tackleNumber != -1&&UserList.users[YurbassFishing.userSelect].inventory.linesUser[i].tackleSelect == true){
+                        else if (UserList.users[YurbassFishing.userSelect].inventory.linesUser[i].tackleNumber != -1){
                             info.setText("Леска установлена на комплект " + (UserList.users[YurbassFishing.userSelect].inventory.linesUser[i].tackleNumber+1));
                         }
                         else{
@@ -477,7 +476,6 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
                     for (int k = 0; k<UserList.users[YurbassFishing.userSelect].inventory.linesUser.length;k++){
                         if (UserList.users[YurbassFishing.userSelect].inventory.linesUser[k].tackleNumber == SelectUser.tacklesList[spinIndex].lineT.tackleNumber){
                             UserList.users[YurbassFishing.userSelect].inventory.linesUser[k].tackleNumber = -1;
-                            UserList.users[YurbassFishing.userSelect].inventory.linesUser[k].tackleSelect = false;
                             break;
                         }
                     }

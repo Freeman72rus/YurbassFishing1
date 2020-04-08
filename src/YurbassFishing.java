@@ -4,14 +4,18 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class YurbassFishing implements ActionListener {
+    static String myDocs=new JFileChooser().getFileSystemView().getDefaultDirectory().toString();
     static final int weight = 800;
     static final int height = 600;
+    private static String s1;
     JButton locationListButton;//кнопка перехода на локации
     JButton fishBaseButton;//кнопка перехода на рыболовную базу
     JButton saveButton;//кнопка сохранения
@@ -306,26 +310,31 @@ public class YurbassFishing implements ActionListener {
         String inventSpoon = "";
         String inventBaits = "";
         String inventKat = "";
-        try(FileWriter writer = new FileWriter(UserList.users[userSelect].userName, false))
+        String tackle = "";
+        File folder = new File(myDocs + "\\Yurbass Fishing");
+        folder.mkdir();
+        folder = new File(myDocs + "\\Yurbass Fishing\\Save");
+        folder.mkdir();
+        try(FileWriter writer = new FileWriter(myDocs + "\\Yurbass Fishing\\Save\\" + UserList.users[userSelect].userName + ".txt", StandardCharsets.UTF_8, false))
         {
             String text = "";
-            text += UserList.users[userSelect].userName + "\n" + UserList.users[userSelect].baseNow + "\n"
-                    + UserList.users[userSelect].userMoney + "\n" + UserList.users[userSelect].userExp + "\n";
+            text += UserList.users[userSelect].userName + "\n" + UserList.users[userSelect].baseNow + "\n" + UserList.users[userSelect].userMoney + "\n" + UserList.users[userSelect].userExp
+                    + "\n" + countSpin + "\n" + hours + "\n" + minutes + "\n" + daysWeekCount + "\n" + days + "\n" + month + "\n" + years + "\n";
             for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.spinningsUser.length; j++){
                 if (UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j] != null){
-                    inventSpin += "spin:" + UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j].spinName + "|" + UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j].spinSafety + "\n";
+                    inventSpin += "spin:\n" + UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j].spinName + "\n" + UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j].spinSafety + "\n" + UserList.users[userSelect].inventory.spinningsUser[j].spinCount + "\n";
                 }
             }
             text += inventSpin;
             for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.linesUser.length; j++){
                 if (UserList.users[YurbassFishing.userSelect].inventory.linesUser[j] != null){
-                    inventLine += "line:" + UserList.users[YurbassFishing.userSelect].inventory.linesUser[j].lineName + "|" + UserList.users[YurbassFishing.userSelect].inventory.linesUser[j].lineLength + "|" + UserList.users[YurbassFishing.userSelect].inventory.linesUser[j].tackleNumber + "\n";
+                    inventLine += "line:\n" + UserList.users[YurbassFishing.userSelect].inventory.linesUser[j].lineName + "\n" + UserList.users[YurbassFishing.userSelect].inventory.linesUser[j].lineLength + "\n" + UserList.users[YurbassFishing.userSelect].inventory.linesUser[j].tackleNumber + "\n";
                 }
             }
             text += inventLine;
             for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.hooksUser.length; j++){
                 if (UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j] != null){
-                    inventHook += "hook:" + UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j].hookName + "|" + UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j].hookQuality + "\n";
+                    inventHook += "hook:\n" + UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j].hookName + "\n" + UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j].hookQuantity + "\n";
                 }
             }
             text += inventHook;
@@ -337,16 +346,30 @@ public class YurbassFishing implements ActionListener {
             text += inventSpoon;*/
             for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.baitsUser.length; j++){
                 if (UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j] != null){
-                    inventBaits += "baits:" + UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j].baitsName + "|" + UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j].baitsQuantity + "\n";
+                    inventBaits += "baits:\n" + UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j].baitsName + "\n" + UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j].baitsQuantity + "\n";
                 }
             }
             text += inventBaits;
             for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.katUser.length; j++){
                 if (UserList.users[YurbassFishing.userSelect].inventory.katUser[j] != null){
-                    inventKat += "kat:" + UserList.users[YurbassFishing.userSelect].inventory.katUser[j].katName + "|" + UserList.users[YurbassFishing.userSelect].inventory.katUser[j].katSafety + "\n";
+                    inventKat += "kat:\n" + UserList.users[YurbassFishing.userSelect].inventory.katUser[j].katName + "\n" + UserList.users[YurbassFishing.userSelect].inventory.katUser[j].katSafety + "\n" + UserList.users[YurbassFishing.userSelect].inventory.katUser[j].tackleNumber + "\n";
                 }
             }
             text += inventKat;
+            for (int j = 0; j<SelectUser.tacklesList.length;j++){
+                if (SelectUser.tacklesList[j]!= null){
+                    tackle += "tackle:\n" + UserList.users[userSelect].inventory.spinningsUser[j].spinCount + "\n";
+                    if (SelectUser.tacklesList[j].hookT !=null){
+                        tackle += SelectUser.tacklesList[j].hookT.hookName + "\n";
+                    }
+                    else tackle += "null"+"\n";
+                    if (SelectUser.tacklesList[j].baitsT !=null){
+                        tackle += SelectUser.tacklesList[j].baitsT.baitsName + "\n";
+                    }
+                    else tackle += "null"+"\n";
+                }
+            }
+            text += tackle;
 
 
 
@@ -360,138 +383,177 @@ public class YurbassFishing implements ActionListener {
         }
     }
     static void loadGame(){
-        try(FileReader reader = new FileReader(UserList.users[userSelect].userName))
+        try(FileReader reader = new FileReader(myDocs + "\\Yurbass Fishing\\Save\\" + UserList.users[userSelect].userName + ".txt", StandardCharsets.UTF_8))
         {
             Scanner scanner = new Scanner(reader);
             UserList.users[userSelect].userName = scanner.nextLine();
             UserList.users[userSelect].baseNow = scanner.nextLine();
             UserList.users[userSelect].userMoney = Long.parseLong(scanner.nextLine());
             UserList.users[userSelect].userExp = Long.parseLong(scanner.nextLine());
-            while (scanner.hasNextLine()){
-                String s = scanner.nextLine();
-                String sub = "";
-                int pos = s.indexOf('|');
-                if (s.contains("spin:")){
-                    try {
-                        sub = s.substring(5, pos);
-                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.spinningsUser.length; j++){
-                            if (UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j] == null){
-                                for (int i =0; i < SpinningList.spinningList.length; i++){
-                                    if (SpinningList.spinningList[i].spinName.equals(sub)){
-                                        UserList.users[userSelect].inventory.spinningsUser[j] = SpinningList.spinningList[i];
-                                        System.out.println(sub);
-                                        sub = s.substring(pos+1);
-                                        UserList.users[userSelect].inventory.spinningsUser[j].spinSafety = Integer.parseInt(sub);
+            countSpin = Integer.parseInt(scanner.nextLine());
+            hours = Integer.parseInt(scanner.nextLine());
+            minutes = Integer.parseInt(scanner.nextLine());
+            daysWeekCount = Integer.parseInt(scanner.nextLine());
+            days = Integer.parseInt(scanner.nextLine());
+            month = Integer.parseInt(scanner.nextLine());
+            years = Integer.parseInt(scanner.nextLine());
+            while (scanner.hasNextLine()) {
+                s1 = scanner.nextLine();
+                System.out.println(s1);
+                try {
+                    if (s1.contains("spin:")) {
+                        s1 = scanner.nextLine();
+                        System.out.println(s1);
+                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.spinningsUser.length; j++) {
+                            if (UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j] == null) {
+                                for (int i = 0; i < SpinningList.spinningList.length; i++) {
+                                    if (SpinningList.spinningList[i].spinName.equals(s1)) {
+                                        UserList.users[userSelect].inventory.spinningsUser[j] = new SpinningList.Spinning(YurbassFishing.countSpin, SpinningList.spinningList[i].spinName, SpinningList.spinningList[i].spinPathImage, SpinningList.spinningList[i].spinCapacity, SpinningList.spinningList[i].spinPrice, SpinningList.spinningList[i].spinSafety);
+                                        UserList.users[userSelect].inventory.spinningsUser[j].spinSafety = Integer.parseInt(scanner.nextLine());
+                                        System.out.println(UserList.users[userSelect].inventory.spinningsUser[j].spinSafety);
+                                        UserList.users[userSelect].inventory.spinningsUser[j].spinCount = Integer.parseInt(scanner.nextLine());
+                                        System.out.println(UserList.users[userSelect].inventory.spinningsUser[j].spinCount);
+                                        SelectUser.tacklesList[j] = new Tackle(UserList.users[YurbassFishing.userSelect].inventory.spinningsUser[j]);
+                                        break;
                                     }
-                                    //break;
                                 }
+                                break;
                             }
-                            //break;
                         }
-                    }
-                    catch (Exception e){
-                        System.out.println("Ошибка в получении спиннинга из сохранения");
                     }
                 }
-                else if (s.contains("line:")){
-                    try {
-                        sub = s.substring(5, pos);
-                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.linesUser.length; j++){
-                            if (UserList.users[YurbassFishing.userSelect].inventory.linesUser[j] == null){
-                                for (int i =0; i < LineList.lineList.length; i++){
-                                    if (LineList.lineList[i].lineName.equals(sub)){
-                                        UserList.users[userSelect].inventory.linesUser[j] = LineList.lineList[i];
-                                        System.out.println(sub);
-                                        sub = s.substring(pos+1);
-                                        int pos2 = sub.indexOf('|');
-                                        sub = s.substring(pos+1, pos+pos2+1);
-                                        UserList.users[userSelect].inventory.linesUser[j].lineLength = Integer.parseInt(sub);
-                                        sub = s.substring(pos+pos2+2);
-                                        System.out.println(sub + " grtjg");
-                                        UserList.users[userSelect].inventory.linesUser[j].tackleNumber = Integer.parseInt(sub);
+                catch (Exception ex){
+                }
+                try {
+                    if (s1.contains("line:")) {
+                        s1 = scanner.nextLine();
+                        System.out.println(s1);
+                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.linesUser.length; j++) {
+                            if (UserList.users[YurbassFishing.userSelect].inventory.linesUser[j] == null) {
+                                for (int i = 0; i < LineList.lineList.length; i++) {
+                                    if (LineList.lineList[i].lineName.equals(s1)) {
+                                        UserList.users[userSelect].inventory.linesUser[j] = new  LineList.Line(LineList.lineList[i].lineName, LineList.lineList[i].linePathImage, LineList.lineList[i].lineSmallImage, LineList.lineList[i].lineCapacity, LineList.lineList[i].lineLength, LineList.lineList[i].linePrice, LineList.lineList[i].tackleNumber);
+                                        UserList.users[userSelect].inventory.linesUser[j].lineLength = Integer.parseInt(scanner.nextLine());
+                                        System.out.println(UserList.users[userSelect].inventory.linesUser[j].lineLength);
+                                        UserList.users[userSelect].inventory.linesUser[j].tackleNumber = Integer.parseInt(scanner.nextLine());
+                                        System.out.println(UserList.users[userSelect].inventory.linesUser[j].tackleNumber);
+                                        for (int k = 0; k<SelectUser.tacklesList.length; k++){
+                                            if (SelectUser.tacklesList[k]!=null&&SelectUser.tacklesList[k].spinT.spinCount==UserList.users[userSelect].inventory.linesUser[j].tackleNumber){
+                                                SelectUser.tacklesList[k].lineT = UserList.users[userSelect].inventory.linesUser[j];
+                                            }
+                                        }
+                                        break;
                                     }
-                                    //break;
                                 }
+                                break;
                             }
-                            //break;
                         }
-                    }
-                    catch (Exception e){
-                        System.out.println("Ошибка в получении лески из сохранения");
                     }
                 }
-                else if (s.contains("hook:")){
-                    try {
-                        sub = s.substring(5, pos);
-                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.hooksUser.length; j++){
-                            if (UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j] == null){
-                                for (int i =0; i < HookList.hookList.length; i++){
-                                    if (HookList.hookList[i].hookName.equals(sub)){
-                                        UserList.users[userSelect].inventory.hooksUser[j] = HookList.hookList[i];
-                                        System.out.println(sub);
-                                        sub = s.substring(pos+1);
-                                        UserList.users[userSelect].inventory.hooksUser[j].hookQuantity = Integer.parseInt(sub);
+                catch (Exception ex){
+                }
+                try {
+                    if (s1.contains("hook:")) {
+                        s1 = scanner.nextLine();
+                        System.out.println(s1);
+                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.hooksUser.length; j++) {
+                            if (UserList.users[YurbassFishing.userSelect].inventory.hooksUser[j] == null) {
+                                for (int i = 0; i < HookList.hookList.length; i++) {
+                                    if (HookList.hookList[i].hookName.equals(s1)) {
+                                        UserList.users[userSelect].inventory.hooksUser[j] = new HookList.Hook(HookList.hookList[i].hookName, HookList.hookList[i].hookPathImage, HookList.hookList[i].hookSmallImage, HookList.hookList[i].hookQuality, HookList.hookList[i].hookQuantity, HookList.hookList[i].hookPrice, HookList.hookList[i].tackleNumber);
+                                        UserList.users[userSelect].inventory.hooksUser[j].hookQuantity = Integer.parseInt(scanner.nextLine());
+                                        System.out.println(UserList.users[userSelect].inventory.hooksUser[j].hookQuantity);
+                                        break;
                                     }
-                                    //break;
                                 }
+                                break;
                             }
-                            //break;
                         }
-                    }
-                    catch (Exception e){
-                        System.out.println("Ошибка в получении крючка из сохранения");
                     }
                 }
-                /*else if (s.contains("spoon:")){
-                }*/
-                else if (s.contains("baits:")){
-                    try {
-                        sub = s.substring(6, pos);
-                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.baitsUser.length; j++){
-                            if (UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j] == null){
-                                for (int i =0; i < BaitsList.baitsList.length; i++){
-                                    if (BaitsList.baitsList[i].baitsName.equals(sub)){
-                                        UserList.users[userSelect].inventory.baitsUser[j] = BaitsList.baitsList[i];
-                                        System.out.println(sub);
-                                        sub = s.substring(pos+1);
-                                        UserList.users[userSelect].inventory.baitsUser[j].baitsQuantity = Integer.parseInt(sub);
+                catch (Exception ex){
+                }
+                try {
+                    if (s1.contains("baits:")) {
+                        s1 = scanner.nextLine();
+                        System.out.println(s1);
+                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.baitsUser.length; j++) {
+                            if (UserList.users[YurbassFishing.userSelect].inventory.baitsUser[j] == null) {
+                                for (int i = 0; i < BaitsList.baitsList.length; i++) {
+                                    if (BaitsList.baitsList[i].baitsName.equals(s1)) {
+                                        UserList.users[userSelect].inventory.baitsUser[j] = new BaitsList.Baits(BaitsList.baitsList[i].baitsName, BaitsList.baitsList[i].baitsPathImage, BaitsList.baitsList[i].baitsSmallImage, BaitsList.baitsList[i].baitsType, BaitsList.baitsList[i].baitsQuantity, BaitsList.baitsList[i].baitsPrice, BaitsList.baitsList[i].tackleNumber);
+                                        UserList.users[userSelect].inventory.baitsUser[j].baitsQuantity = Integer.parseInt(scanner.nextLine());
+                                        System.out.println(UserList.users[userSelect].inventory.baitsUser[j].baitsQuantity);
+                                        break;
                                     }
-                                    //break;
                                 }
+                                break;
                             }
-                            //break;
                         }
-                    }
-                    catch (Exception e){
-                        System.out.println("Ошибка в получении наживки из сохранения");
                     }
                 }
-                else if (s.contains("kat:")){
-                    try {
-                        sub = s.substring(4, pos);
-                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.katUser.length; j++){
-                            if (UserList.users[YurbassFishing.userSelect].inventory.katUser[j] == null){
-                                for (int i =0; i < KatushkaList.katushkaList.length; i++){
-                                    if (KatushkaList.katushkaList[i].katName.equals(sub)){
-                                        UserList.users[userSelect].inventory.katUser[j] = KatushkaList.katushkaList[i];
-                                        System.out.println(sub);
-                                        sub = s.substring(pos+1);
-                                        UserList.users[userSelect].inventory.katUser[j].katSafety = Integer.parseInt(sub);
+                catch (Exception ex){
+                }
+                try {
+                    if (s1.contains("kat:")) {
+                        s1 = scanner.nextLine();
+                        System.out.println(s1);
+                        for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.katUser.length; j++) {
+                            if (UserList.users[YurbassFishing.userSelect].inventory.katUser[j] == null) {
+                                for (int i = 0; i < KatushkaList.katushkaList.length; i++) {
+                                    if (KatushkaList.katushkaList[i].katName.equals(s1)) {
+                                        UserList.users[userSelect].inventory.katUser[j] = new KatushkaList.Katushka(KatushkaList.katushkaList[i].katName, KatushkaList.katushkaList[i].katPathImage, KatushkaList.katushkaList[i].katSmallImage, KatushkaList.katushkaList[i].katCapacity, KatushkaList.katushkaList[i].katPodshipQuantity, KatushkaList.katushkaList[i].katPrice, KatushkaList.katushkaList[i].katSafety, KatushkaList.katushkaList[i].tackleNumber);
+                                        UserList.users[userSelect].inventory.katUser[j].katSafety = Integer.parseInt(scanner.nextLine());
+                                        System.out.println(UserList.users[userSelect].inventory.katUser[j].katSafety);
+                                        UserList.users[userSelect].inventory.katUser[j].tackleNumber = Integer.parseInt(scanner.nextLine());
+                                        System.out.println(UserList.users[userSelect].inventory.katUser[j].tackleNumber);
+                                        for (int k = 0; k<SelectUser.tacklesList.length; k++){
+                                            if (SelectUser.tacklesList[k]!=null&&SelectUser.tacklesList[k].spinT.spinCount==UserList.users[userSelect].inventory.katUser[j].tackleNumber){
+                                                SelectUser.tacklesList[k].katushkaT = UserList.users[userSelect].inventory.katUser[j];
+                                            }
+                                        }
+                                        break;
                                     }
-                                    //break;
                                 }
+                                break;
                             }
-                            //break;
                         }
                     }
-                    catch (Exception e){
-                        System.out.println("Ошибка в получении катушки из сохранения");
+                }
+                catch (Exception ex){
+                }
+                try {
+                    if (s1.contains("tackle:")) {
+                        s1 = scanner.nextLine();
+                        System.out.println(s1);
+                            for (int j = 0; j < SelectUser.tacklesList.length; j++) {
+                                if (SelectUser.tacklesList[j].spinT != null && SelectUser.tacklesList[j].spinT.spinCount == Integer.parseInt(s1)) {
+                                    s1 = scanner.nextLine();
+                                    for (int l = 0; l < UserList.users[userSelect].inventory.hooksUser.length;l++) {
+                                        if (s1.equals(UserList.users[userSelect].inventory.hooksUser[l].hookName)){
+                                            SelectUser.tacklesList[j].hookT = UserList.users[userSelect].inventory.hooksUser[l];
+                                            break;
+                                        }
+                                        else SelectUser.tacklesList[j].hookT = null;
+                                    }
+                                    s1 = scanner.nextLine();
+                                    for (int l = 0; l < UserList.users[userSelect].inventory.baitsUser.length;l++) {
+                                        if (s1.equals(UserList.users[userSelect].inventory.baitsUser[l].baitsName)){
+                                            SelectUser.tacklesList[j].baitsT = UserList.users[userSelect].inventory.baitsUser[l];
+                                            break;
+                                        }
+                                        else SelectUser.tacklesList[j].baitsT = null;
+                                    }
+                                    break;
+                                }
+                            }
                     }
+                }
+                catch (Exception ex){
                 }
             }
         }
         catch(IOException ex){
-
             System.out.println(ex.getMessage());
         }
     }

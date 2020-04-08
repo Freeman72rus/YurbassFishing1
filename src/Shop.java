@@ -14,7 +14,7 @@ import java.io.IOException;
 
 class Shop extends JFrame implements ActionListener, ChangeListener {//Класс реализует магазин товаров
     JFrame shopF;
-    FishBase fb = new FishBase();;
+    FishBase fb = new FishBase();
     int mouseClicX;
     int mouseClicY;
     JList jlistSpin;
@@ -249,7 +249,7 @@ class Shop extends JFrame implements ActionListener, ChangeListener {//Клас�
                         userMoney.setText(UserList.users[YurbassFishing.userSelect].userMoney + " руб.");
                         for (int j = 0; j < UserList.users[YurbassFishing.userSelect].inventory.linesUser.length; j++){
                             if (UserList.users[YurbassFishing.userSelect].inventory.linesUser[j] == null){
-                                UserList.users[YurbassFishing.userSelect].inventory.linesUser[j] = new  LineList.Line(LineList.lineList[i].lineName, LineList.lineList[i].linePathImage, LineList.lineList[i].lineSmallImage, LineList.lineList[i].lineCapacity, LineList.lineList[i].lineLength, LineList.lineList[i].linePrice, LineList.lineList[i].tackleNumber, LineList.lineList[i].tackleSelect);
+                                UserList.users[YurbassFishing.userSelect].inventory.linesUser[j] = new  LineList.Line(LineList.lineList[i].lineName, LineList.lineList[i].linePathImage, LineList.lineList[i].lineSmallImage, LineList.lineList[i].lineCapacity, LineList.lineList[i].lineLength, LineList.lineList[i].linePrice, LineList.lineList[i].tackleNumber);
                                 buyInfo.setText("Куплена леска на " + linesList[i]);
                                 break;
                             }
