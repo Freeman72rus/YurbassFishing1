@@ -428,6 +428,11 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
                     if (LocFrame.s2!=SelectUser.tacklesList[spinIndex].spinT.spinCount&&LocFrame.s3!=SelectUser.tacklesList[spinIndex].spinT.spinCount){
                         LocFrame.s1 = SelectUser.tacklesList[spinIndex].spinT.spinCount;
                         LocFrame.locFrame.setVisible(true);
+                        LocFrame.baits.setIcon(SelectUser.tacklesList[spinIndex].baitsT.baitsSmallImage);
+                        LocFrame.spinSelect1 = true;
+                        LocFrame.spinSelect2 = LocFrame.spinSelect3 = false;
+                        LocFrame.spinSelectLabel.setBounds(LocFrame.x2_1-30, LocFrame.y2-20, 17,17);
+                        LocFrame.spinSelectLabel.setIcon(new ImageIcon(LocFrame.class.getResource("/Image/interface/triangle.gif")));
                         inventFrame.setVisible(false);
                         inventFrame.dispose();
                     }
@@ -439,6 +444,11 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
                     if (LocFrame.s1!=SelectUser.tacklesList[spinIndex].spinT.spinCount&&LocFrame.s3!=SelectUser.tacklesList[spinIndex].spinT.spinCount){
                         LocFrame.s2 = SelectUser.tacklesList[spinIndex].spinT.spinCount;
                         LocFrame.locFrame.setVisible(true);
+                        LocFrame.baits.setIcon(SelectUser.tacklesList[spinIndex].baitsT.baitsSmallImage);
+                        LocFrame.spinSelect2 = true;
+                        LocFrame.spinSelect1 = LocFrame.spinSelect3 = false;
+                        LocFrame.spinSelectLabel.setBounds(LocFrame.x2_2-30, LocFrame.y2-20, 17,17);
+                        LocFrame.spinSelectLabel.setIcon(new ImageIcon(LocFrame.class.getResource("/Image/interface/triangle.gif")));
                         inventFrame.setVisible(false);
                         inventFrame.dispose();
                     }
@@ -450,6 +460,11 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
                     if (LocFrame.s1!=SelectUser.tacklesList[spinIndex].spinT.spinCount&&LocFrame.s2!=SelectUser.tacklesList[spinIndex].spinT.spinCount){
                         LocFrame.s3 = SelectUser.tacklesList[spinIndex].spinT.spinCount;
                         LocFrame.locFrame.setVisible(true);
+                        LocFrame.baits.setIcon(SelectUser.tacklesList[spinIndex].baitsT.baitsSmallImage);
+                        LocFrame.spinSelect3 = true;
+                        LocFrame.spinSelect1 = LocFrame.spinSelect2 = false;
+                        LocFrame.spinSelectLabel.setBounds(LocFrame.x2_3-30, LocFrame.y2-20, 17,17);
+                        LocFrame.spinSelectLabel.setIcon(new ImageIcon(LocFrame.class.getResource("/Image/interface/triangle.gif")));
                         inventFrame.setVisible(false);
                         inventFrame.dispose();
                     }

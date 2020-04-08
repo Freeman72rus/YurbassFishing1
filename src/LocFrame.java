@@ -1,16 +1,14 @@
 import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-class LocFrame extends JFrame implements ActionListener, ChangeListener, MouseMotionListener {
+class LocFrame extends JFrame implements ActionListener, ChangeListener, MouseMotionListener, MouseListener {
     static JFrame locFrame;
     JButton backButton;
     JButton inventButton;
@@ -18,12 +16,24 @@ class LocFrame extends JFrame implements ActionListener, ChangeListener, MouseMo
     JButton cageButton;
     InventoryFrame inventoryFrame;
     static JLabel clock = new JLabel(YurbassFishing.clockStr);
+    static JLabel baits = new JLabel("");
+    static JLabel spinSelectLabel = new JLabel("");
     static int s1 = -1;// флаги показывающие достан ли спиннинг и какой (номер по tackleList)
     static int s2 = -1;
     static int s3 = -1;
     static boolean spinSelect1 = false;//флаги показывающие какой спиннинг выбран в настоящий момент
     static boolean spinSelect2 = false;
     static boolean spinSelect3 = false;
+    static int y1 = 255;
+    static int y2 = 470;
+    static int x1_1 = 100;
+    static int x2_1 = 140;
+    static int x1_2 = 300;
+    static int x2_2 = 340;
+    static int x1_3 = 500;
+    static int x2_3 = 540;
+    int mouseClickX;
+    int mouseClickY;
     LocFrame(){
         ThisWaterLocList.locListFrame.setVisible(false);
         locFrame = new JFrame(YurbassFishing.nowBase.name + ": " + ThisWaterLocList.nowLoc.locName);
@@ -52,11 +62,16 @@ class LocFrame extends JFrame implements ActionListener, ChangeListener, MouseMo
         clock.setBounds(95,483,100,30);
         clock.setFont(new Font("Arial", Font.BOLD, 16));
 
+        baits.setBounds(550,500,80,80);
 
 
+
+        locFrame.addMouseListener(this);
         panel.add(backButton);
         panel.add(clock);
         panel.add(inventButton);
+        panel.add(baits);
+        panel.add(spinSelectLabel);
         locFrame.setVisible(true);
     }
 
@@ -114,6 +129,50 @@ class LocFrame extends JFrame implements ActionListener, ChangeListener, MouseMo
     public void mouseMoved(MouseEvent e) {
 
     }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        mouseClickX = e.getX();
+        mouseClickY = e.getY();
+        if (mouseClickX>x1_1&&mouseClickX<x2_1&&mouseClickY>y1&&mouseClickY<y2){
+            spinSelect1 = true;
+            spinSelect2 = spinSelect3 = false;
+            spinSelectLabel.setBounds(x2_1-30, y2-20, 17,17);
+            spinSelectLabel.setIcon(new ImageIcon(LocFrame.class.getResource("/Image/interface/triangle.gif")));
+        }
+        if (mouseClickX>x1_2&&mouseClickX<x2_2&&mouseClickY>y1&&mouseClickY<y2){
+            spinSelect2 = true;
+            spinSelect1 = spinSelect3 = false;
+            spinSelectLabel.setBounds(x2_2-30, y2-20, 17,17);
+            spinSelectLabel.setIcon(new ImageIcon(LocFrame.class.getResource("/Image/interface/triangle.gif")));
+        }
+        if (mouseClickX>x1_3&&mouseClickX<x2_3&&mouseClickY>y1&&mouseClickY<y2){
+            spinSelect3 = true;
+            spinSelect1 = spinSelect2 = false;
+            spinSelectLabel.setBounds(x2_3-30, y2-20, 17,17);
+            spinSelectLabel.setIcon(new ImageIcon(LocFrame.class.getResource("/Image/interface/triangle.gif")));
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
 }
 class LocFramePanel extends JPanel{
     BufferedImage locImageD;
@@ -138,21 +197,21 @@ class LocFramePanel extends JPanel{
                 g.drawImage(locImageN, 0,0, null);
             }
             if (LocFrame.s1!=-1){
-                g.drawImage(spin1, 100, 255, null);
+                g.drawImage(spin1, LocFrame.x1_1, LocFrame.y1, null);
                 repaint();
             }
             if (LocFrame.s2!=-1){
-                g.drawImage(spin2, 300, 255, null);
+                g.drawImage(spin2, LocFrame.x1_2, LocFrame.y1, null);
                 repaint();
             }
             if (LocFrame.s3!=-1){
-                g.drawImage(spin3, 500, 255, null);
+                g.drawImage(spin3, LocFrame.x1_3, LocFrame.y1, null);
                 repaint();
             }
-            /*Timer timer = new Timer(1000, new ActionListener() {
+            /*Timer timer = new Timer(100, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                    System.out.println("frewff");
                 }
             });
             timer.start();*/
