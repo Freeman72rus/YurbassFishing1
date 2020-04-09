@@ -142,7 +142,7 @@ class LocFrame extends JFrame implements ActionListener, ChangeListener, MouseMo
             spinSelect2 = spinSelect3 = false;
             spinSelectLabel.setBounds(x2_1-30, y2-20, 17,17);
             spinSelectLabel.setIcon(new ImageIcon(LocFrame.class.getResource("/Image/interface/triangle.gif")));
-            baits.setIcon(SelectUser.tacklesList[InventoryFrame.spinIndex].baitsT.baitsSmallImage);
+            baits.setIcon(spinning1.baitsT.baitsSmallImage);
             if (e.getClickCount() == 2){
                 spinSelect1 = false;
                 s1 = -1;
@@ -155,6 +155,7 @@ class LocFrame extends JFrame implements ActionListener, ChangeListener, MouseMo
             spinSelect1 = spinSelect3 = false;
             spinSelectLabel.setBounds(x2_2-30, y2-20, 17,17);
             spinSelectLabel.setIcon(new ImageIcon(LocFrame.class.getResource("/Image/interface/triangle.gif")));
+            baits.setIcon(spinning2.baitsT.baitsSmallImage);
             if (e.getClickCount() == 2){
                 spinSelect2 = false;
                 s2 = -1;
@@ -167,6 +168,7 @@ class LocFrame extends JFrame implements ActionListener, ChangeListener, MouseMo
             spinSelect1 = spinSelect2 = false;
             spinSelectLabel.setBounds(x2_3-30, y2-20, 17,17);
             spinSelectLabel.setIcon(new ImageIcon(LocFrame.class.getResource("/Image/interface/triangle.gif")));
+            baits.setIcon(spinning3.baitsT.baitsSmallImage);
             if (e.getClickCount() == 2){
                 spinSelect3 = false;
                 s3 = -1;
