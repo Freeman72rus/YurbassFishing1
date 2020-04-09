@@ -34,6 +34,9 @@ class LocFrame extends JFrame implements ActionListener, ChangeListener, MouseMo
     static int x2_3 = 540;
     int mouseClickX;
     int mouseClickY;
+    static Tackle spinning1 =  null;
+    static Tackle spinning2 = null;
+    static Tackle spinning3 = null;
     LocFrame(){
         ThisWaterLocList.locListFrame.setVisible(false);
         locFrame = new JFrame(YurbassFishing.nowBase.name + ": " + ThisWaterLocList.nowLoc.locName);
@@ -134,23 +137,42 @@ class LocFrame extends JFrame implements ActionListener, ChangeListener, MouseMo
     public void mouseClicked(MouseEvent e) {
         mouseClickX = e.getX();
         mouseClickY = e.getY();
-        if (mouseClickX>x1_1&&mouseClickX<x2_1&&mouseClickY>y1&&mouseClickY<y2){
+        if (s1!=-1&&mouseClickX>x1_1&&mouseClickX<x2_1&&mouseClickY>y1&&mouseClickY<y2){
             spinSelect1 = true;
             spinSelect2 = spinSelect3 = false;
             spinSelectLabel.setBounds(x2_1-30, y2-20, 17,17);
             spinSelectLabel.setIcon(new ImageIcon(LocFrame.class.getResource("/Image/interface/triangle.gif")));
+            baits.setIcon(SelectUser.tacklesList[InventoryFrame.spinIndex].baitsT.baitsSmallImage);
+            if (e.getClickCount() == 2){
+                spinSelect1 = false;
+                s1 = -1;
+                spinSelectLabel.setIcon(null);
+                baits.setIcon(null);
+            }
         }
-        if (mouseClickX>x1_2&&mouseClickX<x2_2&&mouseClickY>y1&&mouseClickY<y2){
+        if (s2!=-1&&mouseClickX>x1_2&&mouseClickX<x2_2&&mouseClickY>y1&&mouseClickY<y2){
             spinSelect2 = true;
             spinSelect1 = spinSelect3 = false;
             spinSelectLabel.setBounds(x2_2-30, y2-20, 17,17);
             spinSelectLabel.setIcon(new ImageIcon(LocFrame.class.getResource("/Image/interface/triangle.gif")));
+            if (e.getClickCount() == 2){
+                spinSelect2 = false;
+                s2 = -1;
+                spinSelectLabel.setIcon(null);
+                baits.setIcon(null);
+            }
         }
-        if (mouseClickX>x1_3&&mouseClickX<x2_3&&mouseClickY>y1&&mouseClickY<y2){
+        if (s3!=-1&&mouseClickX>x1_3&&mouseClickX<x2_3&&mouseClickY>y1&&mouseClickY<y2){
             spinSelect3 = true;
             spinSelect1 = spinSelect2 = false;
             spinSelectLabel.setBounds(x2_3-30, y2-20, 17,17);
             spinSelectLabel.setIcon(new ImageIcon(LocFrame.class.getResource("/Image/interface/triangle.gif")));
+            if (e.getClickCount() == 2){
+                spinSelect3 = false;
+                s3 = -1;
+                spinSelectLabel.setIcon(null);
+                baits.setIcon(null);
+            }
         }
     }
 

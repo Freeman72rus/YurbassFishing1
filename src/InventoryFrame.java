@@ -55,7 +55,7 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
     String[] katInventListName;
     int mouseClicX;
     int mouseClicY;
-    int spinIndex = -1;
+    static int spinIndex = -1;
     int sp;
 
 
@@ -433,6 +433,7 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
                         LocFrame.spinSelect2 = LocFrame.spinSelect3 = false;
                         LocFrame.spinSelectLabel.setBounds(LocFrame.x2_1-30, LocFrame.y2-20, 17,17);
                         LocFrame.spinSelectLabel.setIcon(new ImageIcon(LocFrame.class.getResource("/Image/interface/triangle.gif")));
+                        LocFrame.spinning1 = SelectUser.tacklesList[spinIndex];
                         inventFrame.setVisible(false);
                         inventFrame.dispose();
                     }
@@ -449,6 +450,7 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
                         LocFrame.spinSelect1 = LocFrame.spinSelect3 = false;
                         LocFrame.spinSelectLabel.setBounds(LocFrame.x2_2-30, LocFrame.y2-20, 17,17);
                         LocFrame.spinSelectLabel.setIcon(new ImageIcon(LocFrame.class.getResource("/Image/interface/triangle.gif")));
+                        LocFrame.spinning2 = SelectUser.tacklesList[spinIndex];
                         inventFrame.setVisible(false);
                         inventFrame.dispose();
                     }
@@ -465,6 +467,7 @@ class InventoryFrame extends JFrame implements MouseListener, ActionListener, Ch
                         LocFrame.spinSelect1 = LocFrame.spinSelect2 = false;
                         LocFrame.spinSelectLabel.setBounds(LocFrame.x2_3-30, LocFrame.y2-20, 17,17);
                         LocFrame.spinSelectLabel.setIcon(new ImageIcon(LocFrame.class.getResource("/Image/interface/triangle.gif")));
+                        LocFrame.spinning3 = SelectUser.tacklesList[spinIndex];
                         inventFrame.setVisible(false);
                         inventFrame.dispose();
                     }
